@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class XboxOneController
 {
+	public enum StickValue
+	{
+		LeftStick,
+		RightStick
+	}
+
 	public enum AxisValue
 	{
 		LeftStickHorizontal,
@@ -108,9 +114,13 @@ public class XboxOneController
 
 		ThisFrame.LeftStickAxes.x = Input.GetAxis(LeftStickHorizontalTag);
 		ThisFrame.LeftStickAxes.y = Input.GetAxis(LeftStickVerticalTag);
-
+		
 		ThisFrame.RightStickAxes.x = Input.GetAxis(RightStickHorizontalTag);
 		ThisFrame.RightStickAxes.y = Input.GetAxis(RightStickVerticalTag);
+
+		// Unity returns -1 for north, 1 for south. Inverting for ease of use.
+		ThisFrame.LeftStickAxes.y *= -1;
+		ThisFrame.RightStickAxes.y *= -1;
 
 		ThisFrame.LeftTriggerAxis = Input.GetAxis(LeftTriggerTag);
 		ThisFrame.RightTriggerAxis = Input.GetAxis(RightTriggerTag);
@@ -142,6 +152,16 @@ public class XboxOneController
 			default:
 				throw new NotImplementedException("No assigned axis value for " + axis);
 		}
+	}
+
+	public Vector2 GetAxis(StickValue stick)
+	{
+		if (stick == StickValue.LeftStick)
+		{
+			return ThisFrame.LeftStickAxes;
+		}
+
+		return ThisFrame.RightStickAxes;
 	}
 
 	public ButtonState GetButtonState(ButtonValue button)
