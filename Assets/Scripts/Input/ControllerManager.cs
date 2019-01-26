@@ -1,18 +1,19 @@
 ﻿using System;
 using UnityEngine;
 
-public class ControllerManager : MonoBehaviour
+public class ControllerManager
 {
-	XboxOneController PlayerOneController;
-	XboxOneController PlayerTwoController;
+	public XboxOneController PlayerOneController;
+	public XboxOneController PlayerTwoController;
 
 	bool BothControllersInitialized = false;
 	bool BothControllersPaired = false;
 
+	public event Action BothControllersInitializedEvent = delegate { };
 	public event Action OneOrMoreControllersDisconnectedEvent = delegate { };
-	public event Action AllControllersConnectedEvent = delegate { };
+	public event Action ControllersReconnectedEvent = delegate { };
 	
-	void Update()
+	public void UpdateControllers()
 	{
 		var joystickNames = Input.GetJoystickNames();
 
@@ -31,7 +32,7 @@ public class ControllerManager : MonoBehaviour
 
 				BothControllersInitialized = true;
 				BothControllersPaired = true;
-				AllControllersConnectedEvent();
+				BothControllersInitializedEvent();
 			}
 			else
 			{
@@ -57,7 +58,7 @@ public class ControllerManager : MonoBehaviour
 				    joystickNames[1] == PlayerTwoController.JoystickName)
 				{
 					BothControllersPaired = true;
-					AllControllersConnectedEvent();
+					ControllersReconnectedEvent();
 					Debug.LogError("All controllers paired!");
 				}
 			}
