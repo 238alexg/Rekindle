@@ -45,17 +45,20 @@ public class XboxOneController
 	ControllerState LastFrame = new ControllerState();
 	ControllerState ThisFrame = new ControllerState();
 
-	bool IsPlayerOne = true;
-	string LeftStickHorizontalTag;
-	string LeftStickVerticalTag;
-	string RightStickHorizontalTag;
-	string RightStickVerticalTag;
-	string LeftTriggerTag;
-	string RightTriggerTag;
+	public readonly string JoystickName;
+	readonly bool IsPlayerOne = true;
 
-	public XboxOneController(bool isPlayerOne)
+	readonly string LeftStickHorizontalTag;
+	readonly string LeftStickVerticalTag;
+	readonly string RightStickHorizontalTag;
+	readonly string RightStickVerticalTag;
+	readonly string LeftTriggerTag;
+	readonly string RightTriggerTag;
+
+	public XboxOneController(bool isPlayerOne, string joystickName)
 	{
 		IsPlayerOne = true;
+		JoystickName = joystickName;
 
 		LeftStickHorizontalTag = "Joy" + (IsPlayerOne ? "1" : "2") + "_LeftStickHorizontal";
 		LeftStickVerticalTag = "Joy" + (IsPlayerOne ? "1" : "2") + "_LeftStickVertical";
