@@ -1,70 +1,43 @@
 ﻿using System;
 using UnityEngine;
 
-public class ControllerManager
+public abstract class ControllerManager
 {
 	public XboxOneController PlayerOneController;
 	public XboxOneController PlayerTwoController;
 
-	bool BothControllersInitialized = false;
-	bool BothControllersPaired = false;
+	protected bool BothControllersInitialized = false;
+	protected bool BothControllersPaired = false;
 
-	public event Action BothControllersInitializedEvent = delegate { };
-	public event Action OneOrMoreControllersDisconnectedEvent = delegate { };
-	public event Action ControllersReconnectedEvent = delegate { };
+	public Action BothControllersInitializedEvent = delegate { };
+	public Action OneOrMoreControllersDisconnectedEvent = delegate { };
+	public Action ControllersReconnectedEvent = delegate { };
 	
-	public void UpdateControllers()
+#if DEBUG_CONTROLLERS
+	string ControllerOneString;
+	string ControllerTwoString;
+#endif
+
+	public void Update()
 	{
-		var joystickNames = Input.GetJoystickNames();
+		UpdateControllers();
 
-		if (!BothControllersInitialized)
-		{
-			if (joystickNames.Length >= 2)
-			{
-				if (PlayerOneController == null)
-				{
-					PlayerOneController = new XboxOneController(isPlayerOne: true, joystickNames[0]);
-				}
-				if (PlayerTwoController == null)
-				{
-					PlayerTwoController = new XboxOneController(isPlayerOne: false, joystickNames[1]);
-				}
+#if DEBUG_CONTROLLERS
+		var controllerOneDebugString = PlayerOneController.ToString();
+		var controllerTwoDebugString = PlayerTwoController.ToString();
 
-				BothControllersInitialized = true;
-				BothControllersPaired = true;
-				BothControllersInitializedEvent();
-			}
-			else
-			{
-				return;
-			}
-		}
-		else
+		if (controllerOneDebugString != ControllerOneString)
 		{
-			if (BothControllersPaired)
-			{
-				bool oneOrBothControllersDisconnected = joystickNames[0] != PlayerOneController.JoystickName ||
-				                                        joystickNames[1] != PlayerTwoController.JoystickName;
-				if (oneOrBothControllersDisconnected)
-				{
-					BothControllersPaired = false;
-					OneOrMoreControllersDisconnectedEvent();
-					Debug.LogError("Cannot play game with less than 2 controllers!");
-				}
-			}
-			else if (!BothControllersPaired && joystickNames.Length >= 2)
-			{
-				if (joystickNames[0] == PlayerOneController.JoystickName &&
-				    joystickNames[1] == PlayerTwoController.JoystickName)
-				{
-					BothControllersPaired = true;
-					ControllersReconnectedEvent();
-					Debug.LogError("All controllers paired!");
-				}
-			}
+			ControllerOneString = controllerOneDebugString;
+			Debug.LogWarning(PlayerOneController.JoystickName + " change : " + ControllerOneString);
 		}
-		
-		PlayerOneController.UpdateState();
-		PlayerTwoController.UpdateState();
-    }
+		if (controllerTwoDebugString != ControllerTwoString)
+		{
+			ControllerTwoString = controllerTwoDebugString;
+			Debug.LogWarning(PlayerTwoController.JoystickName + " change: " + ControllerTwoString);
+		}
+#endif
+	}
+
+	protected abstract void UpdateControllers();
 }
