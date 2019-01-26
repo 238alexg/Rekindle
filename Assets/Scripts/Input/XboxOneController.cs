@@ -100,9 +100,7 @@ public class XboxOneController
 		bool right = Input.GetKey(IsPlayerOne ? KeyCode.RightArrow : KeyCode.D);
 		bool up = Input.GetKey(IsPlayerOne ? KeyCode.UpArrow : KeyCode.W);
 		bool down = Input.GetKey(IsPlayerOne ? KeyCode.DownArrow : KeyCode.S);
-
-		UnityEngine.Debug.LogWarning(right);
-
+		
 		ThisFrame.LeftStickAxes.x = left != right ? left ? -1 : 1 : 0;
 		ThisFrame.LeftStickAxes.y = up != down ? down ? -1 : 1 : 0;
 	}
