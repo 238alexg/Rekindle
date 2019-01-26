@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class JsonSaver : MonoBehaviour
 {
-    public CharacterData characterData;
-    public MapData       mapData;
-    public InventoryData inventoryData;
+    public array characterData;
+    public array mapData;
+    public array inventoryData;
     string dataPath;
 
     void Start ()
     {
-        dataPath = Path.Combine(Application.persistentDataPath, "CharacterData.txt");
+        dataPath = Path.Combine(Application.persistentDataPath, "save.txt");
     }
 
     void Update ()
@@ -21,7 +21,7 @@ public class JsonSaver : MonoBehaviour
             Save (characterData, mapData, inventoryData, dataPath);
 
         if (Input.GetKeyDown (KeyCode.L))
-            characterData = Load (characterData, mapData, inventoryData, dataPath);
+            save Data = Load (characterData, mapData, inventoryData, dataPath);
     }
 
     static void Save (CharacterData data, string path)
