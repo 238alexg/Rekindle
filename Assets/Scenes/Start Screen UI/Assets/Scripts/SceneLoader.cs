@@ -12,7 +12,6 @@ public class SceneLoader : MonoBehaviour
         {
             ;
         }
-        Application.LoadLevel(level);
+        UnityEngine.Application.LoadLevel(level);
     }
- 
 }
