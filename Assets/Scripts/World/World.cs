@@ -20,7 +20,7 @@ public class World
 	Vector2Int ScreenSize = new Vector2Int(Screen.width, Screen.height);
 	Vector2Int TileDimensions;
 	Vector2Int RoomCount;
-	Vector2Int RoomSize = new Vector2Int(11, 11);
+	Vector2Int RoomSize = new Vector2Int(9, 9);
 	Vector2Int RoomSizeSharedWalls;
 	
 	public World(TileFinder tileFinder, Tilemap wallTileMap, Tilemap floorTileMap, Tilemap itemTilemap, Tilemap obstacleTilemap)
@@ -43,7 +43,6 @@ public class World
 
 		CenterRoomsInCamera();
 		CreateRoomGrid();
-
 		CreateRoomEntrances();
 	}
 
@@ -54,13 +53,13 @@ public class World
 		cameraPos.x += ScreenSize.x / 2;
 		cameraPos.y += ScreenSize.y / 2;
 
-		if (RoomCount.x * RoomSize.x * TileSize < Screen.width)
+		if ((RoomCount.x * RoomSizeSharedWalls.x + 1) * TileSize < Screen.width)
 		{
-			cameraPos.x -= (Screen.width - RoomCount.x * RoomSize.x * TileSize) / 2;
+			cameraPos.x += (Screen.width - RoomCount.x * RoomSize.x * TileSize);
 		}
-		if (RoomCount.y * RoomSize.y * TileSize < Screen.height)
+		if ((RoomCount.y * RoomSizeSharedWalls.y + 1) * TileSize < Screen.height)
 		{
-			cameraPos.y -= (Screen.height - RoomCount.y * RoomSize.y * TileSize) / 2;
+			cameraPos.y += (Screen.height - RoomCount.y * RoomSize.y * TileSize);
 		}
 
 		camera.transform.position = cameraPos;

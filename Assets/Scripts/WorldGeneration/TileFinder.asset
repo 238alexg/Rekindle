@@ -12,6 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9378e7da489814542bae1a55f4473fed, type: 3}
   m_Name: TileFinder
   m_EditorClassIdentifier: 
-  Wall: {fileID: 11400000, guid: dc5a638876c89c94aa8b1f1c8c164414, type: 2}
+  Wall: {fileID: 11400000, guid: 0635bbfc320af0d42b8f952a66659096, type: 2}
   Floor: {fileID: 11400000, guid: 7551a86c0c297604b9025c1e9fd3fd60, type: 2}
   Door: {fileID: 11400000, guid: dc8cb7fbb470c0346a45dcf9c1b41d62, type: 2}
+  HappyStoneWalls: {fileID: 0}
+  SadStoneWalls: {fileID: 0}
+  KeyBlue: {fileID: 0}
+  KeyGreen: {fileID: 0}
+  KeyRed: {fileID: 0}
+  KeyYellow: {fileID: 0}
+  ButtonBlue: {fileID: 0}
+  ButtonGreen: {fileID: 0}
+  ButtonRed: {fileID: 0}
+  ButtonStone: {fileID: 0}
+  ButtonYellow: {fileID: 0}
+  Lever: {fileID: 0}
+  Torch: {fileID: 0}
