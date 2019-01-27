@@ -9,13 +9,17 @@ public class World
 
 	readonly Tilemap Walls;
 	readonly Tilemap Floors;
+	readonly Tilemap Items;
+	readonly Tilemap Obstacles;
 	public HashSet<Room> Rooms = new HashSet<Room>();
 
-	public World(TileFinder tileFinder, Tilemap wallTileMap, Tilemap floorTileMap)
+	public World(TileFinder tileFinder, Tilemap wallTileMap, Tilemap floorTileMap, Tilemap itemTilemap, Tilemap obstacleTilemap)
 	{
 		TileFinder = tileFinder;
 		Walls = wallTileMap;
 		Floors = floorTileMap;
+		Items = itemTilemap;
+		Obstacles = obstacleTilemap;
 	}
 
 	public void CreateRoom(Vector2Int position, Vector2Int size, Vector2Int[] Entrances)
@@ -34,7 +38,8 @@ public class World
 
 				if (isWall)
 				{
-					Walls.SetTile(currentTile, TileFinder.Wall);
+					//Walls.SetTile(currentTile, TileFinder.Wall);
+					Obstacles.SetTile(currentTile, TileFinder.Door);
 				}
 				else
 				{

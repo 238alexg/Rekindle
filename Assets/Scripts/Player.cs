@@ -2,9 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
+	enum Direction
+	{
+		North,
+		South,
+		East,
+		West
+	}
+
 	const float SpeedModifier = 5f;
 	const float ShellRadius = 0.01f;
 
@@ -19,6 +28,8 @@ public class Player : MonoBehaviour
 
 	XboxOneController Controller;
 	Physics2DRaycaster Raycaster;
+
+	Direction CurrentDirection;
 	
 	public void Initialize(XboxOneController controller)
 	{
@@ -27,22 +38,50 @@ public class Player : MonoBehaviour
 
 	public void UpdatePlayerWithInput()
 	{
-		var movementVector = Controller.GetAxis(XboxOneController.StickValue.LeftStick);
-		movementVector *= SpeedModifier;
+		var joystickVector = Controller.GetAxis(XboxOneController.StickValue.LeftStick);
+		joystickVector *= SpeedModifier;
 
-		var horizontalMove = movementVector;
+		var horizontalMove = joystickVector;
 		horizontalMove.y = 0;
 		RequestMove(horizontalMove);
 
-		var verticalMove = movementVector;
+		var verticalMove = joystickVector;
 		verticalMove.x = 0;
 		RequestMove(verticalMove);
-		
+
+		CurrentDirection = GetDirection(joystickVector);
+		if (Controller.GetButtonState(XboxOneController.ButtonValue.AButton) ==
+		    XboxOneController.ButtonState.JustReleased)
+		{
+			AttemptButtonInteraction(XboxOneController.ButtonValue.AButton, CurrentDirection);
+		}
+		else if (Controller.GetButtonState(XboxOneController.ButtonValue.BButton) ==
+		         XboxOneController.ButtonState.JustReleased)
+		{
+			AttemptButtonInteraction(XboxOneController.ButtonValue.BButton, CurrentDirection);
+		}
+
 		// TODO: Update sprite renderer with a character movement animation
 
 		if (Application.Inst.EnableScreenSpaceDarkness)
 		{
 			Application.Inst.ScreenSpaceDarkness.AddLight(transform.position, radius: 0.2f, new Color(0.8f, 0.2f, 0.2f, 0.3f));
+		}
+	}
+
+	Direction GetDirection(Vector2 joystickVector)
+	{
+		if (joystickVector == Vector2.zero)
+		{
+			return CurrentDirection;
+		}
+		else if (Mathf.Abs(joystickVector.x) > Mathf.Abs(joystickVector.y))
+		{
+			return joystickVector.x > 0 ? Direction.East : Direction.West;
+		}
+		else
+		{
+			return joystickVector.y > 0 ? Direction.North : Direction.South;
 		}
 	}
 
@@ -65,5 +104,60 @@ public class Player : MonoBehaviour
 		}
 
 		Rigidbody.position = Rigidbody.position + requestedMoveVector.normalized * moveDistance;
-	}  
+	}
+
+	void AttemptButtonInteraction(XboxOneController.ButtonValue buttonValue, Direction direction)
+	{
+		var destination = transform.position;
+		var directionVector = DirectionToVector2(direction);
+		destination.x += directionVector.x * 32;
+		destination.y += directionVector.y * 32;
+		var hit = Physics2D.Linecast(transform.position, destination);
+		
+		if (hit)
+		{
+			var tileMap = hit.collider.GetComponent<Tilemap>();
+
+			if (tileMap == null) return;
+
+			
+			var cellPos = tileMap.WorldToCell(destination);
+			var obstacle = tileMap.GetTile<Obstacle>(cellPos);
+
+			if (obstacle == null) return;
+
+			if (buttonValue == XboxOneController.ButtonValue.AButton)
+			{
+				obstacle.OnAButtonPress(this);
+			}
+			else
+			{
+				obstacle.OnBButtonPress(this);
+			}
+		}
+	}
+
+	Vector3Int GetPlayerTilePosition()
+	{
+		var halfScreenSize = new Vector2(Screen.width / 2, Screen.height / 2);
+		var vectorToPlayer = (Vector2)transform.position + halfScreenSize;
+		return new Vector3Int((int)(vectorToPlayer.x / 32), (int)(vectorToPlayer.y / 32), 0);
+	}
+
+	Vector2 DirectionToVector2(Direction direction)
+	{
+		switch (direction)
+		{
+			case Direction.North:
+				return Vector2.up;
+			case Direction.South:
+				return Vector2.down;
+			case Direction.East:
+				return Vector2.right;
+			case Direction.West:
+				return Vector2.left;
+			default:
+				return Vector2.zero;
+		}
+	}
 }

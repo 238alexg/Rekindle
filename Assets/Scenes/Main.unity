@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 449106342}
   - component: {fileID: 449106345}
   - component: {fileID: 449106344}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 489220993}
   - component: {fileID: 489220995}
   - component: {fileID: 489220994}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3163,5 +3163,5 @@ MonoBehaviour:
   TileFinder: {fileID: 11400000, guid: 0c790e997ea04664586f05c35e8126c1, type: 2}
   Walls: {fileID: 747968736}
   Floors: {fileID: 899995157}
-  Items: {fileID: 0}
-  Obstacles: {fileID: 0}
+  Items: {fileID: 1145967695}
+  Obstacles: {fileID: 1003147875}
