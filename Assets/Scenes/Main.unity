@@ -2670,5 +2670,6 @@ MonoBehaviour:
   EnableScreenSpaceDarkness: 0
   PlayerOne: {fileID: 449106343}
   PlayerTwo: {fileID: 365960382}
-  Walls: {fileID: 0}
-  Floors: {fileID: 0}
+  TileFinder: {fileID: 11400000, guid: 0c790e997ea04664586f05c35e8126c1, type: 2}
+  Walls: {fileID: 747968736}
+  Floors: {fileID: 899995157}

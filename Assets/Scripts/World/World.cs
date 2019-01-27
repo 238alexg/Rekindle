@@ -5,17 +5,46 @@ using UnityEngine.Tilemaps;
 
 public class World
 {
+	readonly TileFinder TileFinder;
+
 	readonly Tilemap Walls;
 	readonly Tilemap Floors;
 	public HashSet<Room> Rooms = new HashSet<Room>();
 
-	public World(Tilemap wallTileMap, Tilemap floorTileMap)
+	public World(TileFinder tileFinder, Tilemap wallTileMap, Tilemap floorTileMap)
 	{
+		TileFinder = tileFinder;
 		Walls = wallTileMap;
 		Floors = floorTileMap;
 	}
 
-    public void AddRoom(Room room)
+	public void CreateRoom(Vector2Int position, Vector2Int size, Vector2Int[] Entrances)
+	{
+		int endTileX = position.x + size.x;
+		int endTileY = position.y + size.y;
+
+		for (int x = position.x; x < endTileX; x++)
+		{
+			for (int y = position.y; y < endTileY; y++)
+			{
+				Vector3Int currentTile = new Vector3Int(x, y, 0);
+
+				bool onEdge = x == position.x || x == endTileX - 1 || y == position.y || y == endTileY - 1;
+				bool isWall = onEdge && !Entrances.Contains((Vector2Int)currentTile);
+
+				if (isWall)
+				{
+					Walls.SetTile(currentTile, TileFinder.Wall);
+				}
+				else
+				{
+					Floors.SetTile(currentTile, TileFinder.Floor);
+				}
+			}
+		}
+	}
+
+	public void AddRoom(Room room)
     {
         if(!Rooms.Contains(room))
             Rooms.Add(room);

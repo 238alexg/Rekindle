@@ -12,6 +12,8 @@ public class Application : MonoBehaviour
 	public Player PlayerOne;
 	public Player PlayerTwo;
 
+	public TileFinder TileFinder;
+
 	public Tilemap Walls;
 	public Tilemap Floors;
 
@@ -41,7 +43,9 @@ public class Application : MonoBehaviour
 
 		Debug.Assert(Walls != null, "Walls Tilemap not assigned in Application");
 		Debug.Assert(Floors != null, "Floors Tilemap not assigned in Application");
-		World = new World(Walls, Floors);
+		World = new World(TileFinder, Walls, Floors);
+
+		World.CreateRoom(Vector2Int.zero, Vector2Int.one * 5, new Vector2Int[] {new Vector2Int(2, 4), new Vector2Int(4, 2)});
 	}
 
 	void OnBothControllersInitialized()
