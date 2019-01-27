@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.XR.WSA.Input;
 
 public class World
 {
@@ -14,12 +15,13 @@ public class World
 	readonly Tilemap Obstacles;
 
 	public readonly List<Obstacle> ObstacleList = new List<Obstacle>();
-	public readonly HashSet<Room> Rooms = new HashSet<Room>();
+	public readonly Room[,] Rooms;
 
 	Vector2Int ScreenSize = new Vector2Int(Screen.width, Screen.height);
 	Vector2Int TileDimensions;
 	Vector2Int RoomCount;
-	Vector2Int RoomSize = new Vector2Int(7, 7);
+	Vector2Int RoomSize = new Vector2Int(11, 11);
+	Vector2Int RoomSizeSharedWalls;
 	
 	public World(TileFinder tileFinder, Tilemap wallTileMap, Tilemap floorTileMap, Tilemap itemTilemap, Tilemap obstacleTilemap)
 	{
@@ -29,13 +31,20 @@ public class World
 		Items = itemTilemap;
 		Obstacles = obstacleTilemap;
 
+		RoomSizeSharedWalls = new Vector2Int(RoomSize.x - 1, RoomSize.y - 1);
+
 		var availableTiles = new Vector2Int(Screen.width / TileSize, Screen.height / TileSize);
-		RoomCount = new Vector2Int(availableTiles.x / RoomSize.x, availableTiles.y / RoomSize.y);
-		TileDimensions.x = RoomCount.x * RoomSize.x;
-		TileDimensions.y = RoomCount.y * RoomSize.y;
+		availableTiles -= Vector2Int.one; // Account for top and right walls
+		RoomCount = new Vector2Int(availableTiles.x / RoomSizeSharedWalls.x, availableTiles.y / RoomSizeSharedWalls.y);
+		TileDimensions.x = RoomCount.x * RoomSizeSharedWalls.x + 1;
+		TileDimensions.y = RoomCount.y * RoomSizeSharedWalls.y + 1;
+
+		Rooms = new Room[RoomCount.x, RoomCount.y];
 
 		CenterRoomsInCamera();
 		CreateRoomGrid();
+
+		CreateRoomEntrances();
 	}
 
 	void CenterRoomsInCamera()
@@ -56,37 +65,46 @@ public class World
 
 		camera.transform.position = cameraPos;
 	}
-
+	
 	void CreateRoomGrid()
 	{
-		List<Vector2Int> entrances = new List<Vector2Int>(4);
 		for (int x = 0; x < RoomCount.x; x++)
 		{
 			for (int y = 0; y < RoomCount.y; y++)
 			{
-				entrances.Clear();
+				CreateRoom(new Vector2Int(x, y), new Vector2Int(x * RoomSizeSharedWalls.x, y * RoomSizeSharedWalls.y), RoomSizeSharedWalls);
+			}
+		}
+	}
+
+	void CreateRoomEntrances()
+	{
+		int entranceCount = 0;
+		for (int x = 0; x < RoomCount.x; x++)
+		{
+			for (int y = 0; y < RoomCount.y; y++)
+			{
 				if (x != 0)
 				{
-					entrances.Add(new Vector2Int(x * RoomSize.x, y * RoomSize.y + RoomSize.y / 2));
-				}
-				if (x != RoomCount.x - 1)
-				{
-					entrances.Add(new Vector2Int((x + 1) * RoomSize.x - 1, y * RoomSize.y + RoomSize.y / 2));
+					Vector3Int entrancePosition = new Vector3Int(x * RoomSizeSharedWalls.x, y * RoomSizeSharedWalls.y + RoomSize.y / 2, 0);
+					Entrance newEntrance = new Entrance(Rooms[x, y], Rooms[x - 1, y], entrancePosition);
+					Walls.SetTile(entrancePosition, null);
+					Obstacles.SetTile(entrancePosition, TileFinder.Door);
+					entranceCount++;
 				}
 				if (y != 0)
 				{
-					entrances.Add(new Vector2Int(x * RoomSize.x + RoomSize.x / 2, y * RoomSize.y));
+					Vector3Int entrancePosition = new Vector3Int(x * RoomSizeSharedWalls.x + RoomSize.x / 2, y * RoomSizeSharedWalls.y, 0);
+					Entrance newEntrance = new Entrance(Rooms[x, y], Rooms[x, y - 1], entrancePosition);
+					Walls.SetTile(entrancePosition, null);
+					Obstacles.SetTile(entrancePosition, TileFinder.Door);
+					entranceCount++;
 				}
-				if (y != RoomCount.y - 1)
-				{
-					entrances.Add(new Vector2Int(x * RoomSize.x + RoomSize.x / 2, (y + 1) * RoomSize.y - 1));
-				}
-				CreateRoom(new Vector2Int(x * RoomSize.x, y * RoomSize.y), RoomSize, entrances);
 			}
 		}
 	}
 	
-	public void CreateRoom(Vector2Int position, Vector2Int size, List<Vector2Int> Entrances)
+	public void CreateRoom(Vector2Int roomIndex, Vector2Int position, Vector2Int size)
 	{
 		int endTileX = position.x + size.x;
 		int endTileY = position.y + size.y;
@@ -96,14 +114,14 @@ public class World
 			for (int y = position.y; y < endTileY; y++)
 			{
 				Vector3Int currentTile = new Vector3Int(x, y, 0);
+				
+				bool onTopOrRightEdge = x == endTileX - 1 && roomIndex.x == RoomCount.x - 1 || y == endTileY - 1 && roomIndex.y == RoomCount.y - 1;
+				bool onEdge = x == position.x || y == position.y;
+				bool isSharedWall = onEdge;
 
-				bool onEdge = x == position.x || x == endTileX - 1 || y == position.y || y == endTileY - 1;
-				bool isWall = onEdge && !Entrances.Contains((Vector2Int)currentTile);
-
-				if (isWall)
+				if (isSharedWall || onTopOrRightEdge)
 				{
 					Walls.SetTile(currentTile, TileFinder.Wall);
-					//Obstacles.SetTile(currentTile, TileFinder.Door);
 				}
 				else
 				{
@@ -111,6 +129,8 @@ public class World
 				}
 			}
 		}
+		
+		Rooms[roomIndex.x, roomIndex.y] = new Room(RoomSize.x, RoomSize.y);
 	}
 
 	public void CreateKey(Vector2Int position, int id)
@@ -139,11 +159,6 @@ public class World
 		Vector3Int doorPlacement = new Vector3Int(keyXPosition, keyYPosition, 0);
 		// Door.SetTile(doorPlacement, TileFinder.Door);
 		// TODO: SET TILE
-	}
-	public void AddRoom(Room room)
-	{
-		if(!Rooms.Contains(room))
-			Rooms.Add(room);
 	}
 
 	public void LoadFromString(string loadString)

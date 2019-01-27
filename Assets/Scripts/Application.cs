@@ -80,13 +80,12 @@ public class Application : MonoBehaviour
 		}
 	}
 
-		void Loader()
+	void Loader()
 	{
 		string loadedWorld = JsonSaver.Load("");
 		int dataSeparator = loadedWorld.IndexOf("+", 0);
 		string mapData = loadedWorld.Substring (0, dataSeparator);
 		string characterData = loadedWorld.Substring (dataSeparator, loadedWorld.Length - dataSeparator);
 		World.LoadFromString(mapData);
-
 	}
 }
