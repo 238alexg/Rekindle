@@ -148,6 +148,7 @@ public class World
 		Application.Inst.PlayerOne.Inventory.Add(key1);
 
 		AddDoor(Rooms[0, 1].Entrances[0].TilePosition, key1);
+		AddWall(Rooms[1, 0].Entrances[0].TilePosition, WallOrientations.WallDirection.North);
 	}
 
 	void AddDoor(Vector3Int position, Item key)
@@ -160,9 +161,9 @@ public class World
 		ObstacleList.Add(door);
 	}
 
-	void AddWall(Vector3Int position)
+	void AddWall(Vector3Int position, WallOrientations.WallDirection direction)
 	{
-
+		Walls.SetTile(position, TileFinder.SadStoneWalls.GetWall(direction));
 	}
 
 	void OnObstacleLockChanged(Obstacle obstacle)
@@ -206,19 +207,5 @@ public class World
 	public void LoadFromString(string loadString)
 	{
 		// TODO: Populate rooms, hallways, items, etc. with string
-	}
-
-	public void CreateBetaMap()
-	{
-		// Create a map of rooms with boxes
-		for (int i = 0; i < 3; i ++) {
-			for (int j = 0; j < 8; j++) {
-				// CreateRoom(new Vector2Int(4*-j, 4*-i), Vector2Int.one * 4, new Vector2Int[] {new Vector2Int(-2, 2),new Vector2Int(-10, 0),new Vector2Int(2, 5), new Vector2Int(-4, -2)});
-			}
-		}
-		CreateDoor((new Vector2Int (0,0)), 1);
-		CreateKey((new Vector2Int (2,0)), 1);
-		CreateLever((new Vector2Int (2,0)), 1);
-
 	}
 }
