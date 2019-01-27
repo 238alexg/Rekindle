@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Application : MonoBehaviour
 {
@@ -6,8 +7,13 @@ public class Application : MonoBehaviour
 	public ScreenSpaceDarkness ScreenSpaceDarkness;
 	public bool EnableScreenSpaceDarkness = false;
 
+	public World World;
+
 	public Player PlayerOne;
 	public Player PlayerTwo;
+
+	public Tilemap Walls;
+	public Tilemap Floors;
 
 #if USE_XB1_CONTROLLERS
 	readonly ControllerManager ControllerManager = new XboxControllerManager();
@@ -32,6 +38,10 @@ public class Application : MonoBehaviour
 	{
 		Debug.Assert(ScreenSpaceDarkness != null, "No screen space darkness script attached to Application");
 		ControllerManager.BothControllersInitializedEvent += OnBothControllersInitialized;
+
+		Debug.Assert(Walls != null, "Walls Tilemap not assigned in Application");
+		Debug.Assert(Floors != null, "Floors Tilemap not assigned in Application");
+		World = new World(Walls, Floors);
 	}
 
 	void OnBothControllersInitialized()
