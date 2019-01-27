@@ -2,7 +2,11 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Obstacle : TileBase, IAButtonHandler, IBButtonHandler
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+public class Obstacle : Tile, IAButtonHandler, IBButtonHandler
 {
 	public event Action<bool> ObstacleLockChangedEvent = delegate { };
 
@@ -27,6 +31,11 @@ public class Obstacle : TileBase, IAButtonHandler, IBButtonHandler
 		ObstacleLockChangedEvent(false);
 	}
 
+	public void SubscribeToLever()
+	{
+		// TODO: Subscribe to level pulled event
+	}
+
 	void UnlockObstacle()
 	{
 		Unlocked = true;
@@ -42,4 +51,20 @@ public class Obstacle : TileBase, IAButtonHandler, IBButtonHandler
 	{
 		RelockObstacle();
 	}
+
+	void OnDestroy()
+	{
+		// TODO: Unsubscribe to level pulled event
+	}
+
+#if UNITY_EDITOR
+	[MenuItem("Assets/CustomTiles/ObstacleTile")]
+	public static void CreateObstacleTile()
+	{
+		string path = EditorUtility.SaveFilePanelInProject("Save Obstacle Tile", "Obstacle", "Asset", "Save Road Tile", "Assets/Art/Tilemaps/Obstacles");
+		if (path == "")
+			return;
+		AssetDatabase.CreateAsset(CreateInstance<Obstacle>(), path);
+	}
+#endif
 }

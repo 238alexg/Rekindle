@@ -49,7 +49,7 @@ public class World
 		int keyXPosition = position.x;
 		int keyYPosition = position.y;
 		Vector3Int keyPlacement = new Vector3Int(keyXPosition, keyYPosition, 0);
-		Key.SetTile(KeyPlacement, TileFinder.Key);
+		// Key.SetTile(KeyPlacement, TileFinder.Key);
 		// TODO: SET TILE
 	}
 
