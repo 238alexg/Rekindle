@@ -6,25 +6,26 @@ using UnityEngine.UI;
 
 public class ButtonFunctions : Button
 {
-    private AudioSource audioPlayer;
     public AudioClip hover;
-   
+    public AudioClip click;
 
 
-    protected override void Start()
+     protected override void Start()
     {
         base.Start();
-        audioPlayer = GetComponent<AudioSource>();
-  
+        hover = GetComponent<AudioClip>();
+        click = GetComponent<AudioClip>();
     }
     public override void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.LogError("test");
         base.OnPointerEnter(eventData);
-        audioPlayer.PlayOneShot(hover);
+        AudioManager.PlayEffect(hover);
     }
-  /*  public override void OnPointerClick(PointerEventData eventData)
+    public override void OnPointerClick(PointerEventData eventData)
     {
+        Debug.LogError("test2");
         base.OnPointerClick(eventData);
-        audioPlayer.PlayOneShot();
-    }*/
+        AudioManager.PlayEffect(click);
+    }
 }
