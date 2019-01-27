@@ -44,11 +44,35 @@ public class World
 		}
 	}
 
+	public void CreateKey(Vector2Int position, int id)
+	{
+		int keyXPosition = position.x;
+		int keyYPosition = position.y;
+		Vector3Int keyPlacement = new Vector3Int(keyXPosition, keyYPosition, 0);
+		// TODO: SET TILE
+	}
+
+
+	public void CreateLever(Vector2Int position, int id)
+	{
+		int LeverXPosition = position.x;
+		int LeverYPosition = position.y;
+		Vector3Int LeverPlacement = new Vector3Int(LeverXPosition, LeverYPosition, 0);
+		// TODO: SET TILE
+	}
+
+	public void CreateDoor(Vector2Int position, int id)
+	{
+		int keyXPosition = position.x;
+		int keyYPosition = position.y;
+		Vector3Int keyPlacement = new Vector3Int(keyXPosition, keyYPosition, 0);
+		// TODO: SET TILE
+	}
 	public void AddRoom(Room room)
-    {
-        if(!Rooms.Contains(room))
-            Rooms.Add(room);
-    }
+	{
+		if(!Rooms.Contains(room))
+			Rooms.Add(room);
+	}
 
 	public void LoadFromString(string loadString)
 	{
