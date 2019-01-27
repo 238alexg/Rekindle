@@ -12,13 +12,13 @@ public class GateKeeping : ScriptableObject
 		Yellow
 	}
 
-	public ItemTile BlueDoor;
-	public ItemTile GreenDoor;
-	public ItemTile RedDoor;
-	public ItemTile YellowDoor;
-	public ItemTile Open; 
+	public Obstacle BlueDoor;
+	public Obstacle GreenDoor;
+	public Obstacle RedDoor;
+	public Obstacle YellowDoor;
+	public Obstacle Open; 
 
-	public ItemTile GetDoor(DoorColor color)
+	public Obstacle  GetDoor(DoorColor color)
 	{
 		switch(color)
 		{
