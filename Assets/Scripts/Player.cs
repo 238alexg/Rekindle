@@ -1,58 +1,57 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
-    const float MovementAmount = 1f;  
-    public enum Direction
-    {
-        up,
-        down,
-        left, 
-        right
-    }
+	const float SpeedModifier = 0.05f;
 
-    Direction FacingDirection;
-    Vector2 WorldPosition;
+	public SpriteRenderer SpriteRenderer;
+	
+	XboxOneController Controller;
+	Physics2DRaycaster Raycaster;
 
-    public void Move(Direction direction)
-    {
-        FacingDirection = direction;
-        switch (direction)
-        {
-            case (Direction.up):
-                WorldPosition += MovementAmount * Vector2.up;
-                break;
-            case (Direction.down):
-                WorldPosition += MovementAmount * Vector2.down;
-                break;
-            case (Direction.left):
-                WorldPosition += MovementAmount * Vector2.left;
-                break;
-            case (Direction.right):
-                WorldPosition += MovementAmount * Vector2.right;
-                break;
-        }
-    }
+	public void Initialize(XboxOneController controller)
+	{
+		Controller = controller;
+	}
 
-    public void Interact()
+	public void UpdatePlayerWithInput()
+	{
+		var currentDirection = Controller.GetAxis(XboxOneController.StickValue.LeftStick);
+		currentDirection *= SpeedModifier;
+
+		if (!DidHitCollider(currentDirection * 16))
+		{
+			transform.position += (Vector3)currentDirection;
+		}
+
+		// TODO: Update sprite renderer with a character movement animation
+
+		if (Application.Inst.EnableScreenSpaceDarkness)
+		{
+			Application.Inst.ScreenSpaceDarkness.AddLight(transform.position, radius: 0.2f, new Color(0.8f, 0.2f, 0.2f, 0.3f));
+		}
+	}
+
+    bool DidHitCollider(Vector2 raycastVector)
     {
-        Vector2 offset = Vector2.zero;
-        switch (FacingDirection)
-        {
-            case (Direction.up):
-                offset = Vector2.up;
-                break;
-            case (Direction.down):
-                offset = Vector2.down;
-                break;
-            case (Direction.left):
-                offset = Vector2.left;
-                break;
-            case (Direction.right):
-                offset = Vector2.right;
-                break;
-        }
-    }  
+		// Player's current starting position
+		Vector2 start = transform.position;
+
+		// Calculate end position based on the direction parameters passed in when calling Move.
+		Vector2 end = new Vector2(transform.position.x + raycastVector.x, transform.position.y + raycastVector.y);
+		RaycastHit2D hit = Physics2D.Linecast(start, end);
+
+		//Check if anything was hit
+
+		// TODO: If player hit an item, react differently than if they hit a wall
+		if (hit)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}  
 }

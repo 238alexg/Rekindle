@@ -6,14 +6,15 @@ public class Application : MonoBehaviour
 	public ScreenSpaceDarkness ScreenSpaceDarkness;
 	public bool EnableScreenSpaceDarkness = false;
 
+	public Player PlayerOne;
+	public Player PlayerTwo;
+
 #if USE_XB1_CONTROLLERS
 	readonly ControllerManager ControllerManager = new XboxControllerManager();
 #else
 	readonly ControllerManager ControllerManager = new PCControllerManager();
 #endif
-
-	// Todo: Add 2 readonly player controllers here
-
+	
 	void Start()
 	{
 		if (Inst != null)
@@ -35,12 +36,17 @@ public class Application : MonoBehaviour
 
 	void OnBothControllersInitialized()
 	{
-		// Todo: Initialize 2 player controllers here
+		PlayerOne.Initialize(ControllerManager.PlayerOneController);
+		PlayerTwo.Initialize(ControllerManager.PlayerTwoController);
 	}
 
 	void Update()
 	{
 		ControllerManager.Update();
+
+		PlayerOne.UpdatePlayerWithInput();
+		PlayerTwo.UpdatePlayerWithInput();
+
 		UpdateScreenSpaceShader();
 	}
 
