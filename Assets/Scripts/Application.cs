@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class Application : MonoBehaviour
 {
@@ -68,9 +68,17 @@ public class Application : MonoBehaviour
 
 		void Loader()
 	{
+<<<<<<< HEAD
 		string loadedWorld = JsonSaver.Load("");
 		int dataSeparator = loadedWorld.IndexOf("+", 0);
 		string mapData = loadedWorld.Substring (0, dataSeparator);
 		string characterData = loadedWorld.Substring (dataSeparator, loadedWorld.Length - dataSeparator);
+=======
+		string loadedWorld = JsonSaver.load();
+		int dataSeparator = loadedWorld.IndexOf("+", 0);
+		string mapData = loadedWorld.Substring (0, dataSeparator);
+		string characterData = loadedWorld.Substring (dataSeparator, loadedWorld.Length - dataSeparator);
+		
+>>>>>>> 09ee793... change Loader function in application.cs
 	}
 }
