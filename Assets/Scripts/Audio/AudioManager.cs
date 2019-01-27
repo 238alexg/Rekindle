@@ -34,8 +34,13 @@ public class AudioManager : MonoBehaviour
 
     static readonly AudioSource SFXPlayer = new AudioSource();
 
+    public static void PlayEffect(AudioClip clip)
+    {
+        PlayEffect(clip, 1f, 1f);
+    }
+
     public static void PlayEffect(AudioClip clip, 
-                                float frequency = 1f, float amplitude=1f, 
+                                float frequency, float amplitude, 
                                 float pitchJitter = 0f, float ampJitter = 0f)
     {
         float pitch = frequency + Random.Range(-pitchJitter, pitchJitter);
