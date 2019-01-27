@@ -3,17 +3,24 @@ public class Item : Entity
 {
     public enum ItemType
     {
+        ButtonBlue,
+        ButtonGreen,
+        ButtonRed,
+        ButtonStone,
+        ButtonYellow,
         Lever,
-        Key
+        KeyBlue,
+        KeyGreen,
+        KeyRed,
+        KeyYellow,
+        Torch
     }
 
     public readonly ItemType Type;
     public readonly int Id;
 
-    public Item(ItemType type, int x, int y, int id)
+    public Item(ItemType type, int id)
     {
-        Position.x = x;
-        Position.y = y;
         Type = type;
         Id = id;
     }
