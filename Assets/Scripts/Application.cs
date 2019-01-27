@@ -16,6 +16,8 @@ public class Application : MonoBehaviour
 
 	public Tilemap Walls;
 	public Tilemap Floors;
+	public Tilemap Items;
+	public Tilemap Obstacles;
 
 #if USE_XB1_CONTROLLERS
 	readonly ControllerManager ControllerManager = new XboxControllerManager();

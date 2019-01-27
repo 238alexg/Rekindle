@@ -6,4 +6,5 @@ public class TileFinder : ScriptableObject
 {
 	public TileBase Wall;
 	public TileBase Floor;
+	public Obstacle Door;
 }
