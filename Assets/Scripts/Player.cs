@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,13 +11,15 @@ public class Player : MonoBehaviour
 	public SpriteRenderer SpriteRenderer;
 	public Rigidbody2D Rigidbody;
 
+	[NonSerialized] public readonly List<Item> Inventory = new List<Item>();
+
 	ContactFilter2D ContactFilter;
 	RaycastHit2D[] HitBuffer = new RaycastHit2D[16];
-	protected List<RaycastHit2D> HitBufferList = new List<RaycastHit2D>(16);
+	protected readonly List<RaycastHit2D> HitBufferList = new List<RaycastHit2D>(16);
 
 	XboxOneController Controller;
 	Physics2DRaycaster Raycaster;
-
+	
 	public void Initialize(XboxOneController controller)
 	{
 		Controller = controller;
@@ -39,7 +42,8 @@ public class Player : MonoBehaviour
 
 		if (Application.Inst.EnableScreenSpaceDarkness)
 		{
-			Application.Inst.ScreenSpaceDarkness.AddLight(transform.position, radius: 0.2f, new Color(0.8f, 0.2f, 0.2f, 0.3f));
+			var screenPixel = World.WorldSpaceToScreenPixel(transform.position);
+			Application.Inst.ScreenSpaceDarkness.AddLight(screenPixel, radius: 0.2f, new Color(0.8f, 0.2f, 0.2f, 0.3f));
 		}
 	}
 
