@@ -62,6 +62,15 @@ public class Application : MonoBehaviour
 		PlayerTwo.UpdatePlayerWithInput();
 
 		UpdateScreenSpaceShader();
+
+        Vector3 playerDistance = PlayerTwo.transform.position - PlayerOne.transform.position;
+
+        float sqrPlayerDist = Vector3.SqrMagnitude(playerDistance);
+
+        float maxDist = 500 * 500 + 350 * 350;
+        float scaledDist = sqrPlayerDist / maxDist;
+
+        MusicPlayer.Inst.UpdateMood(1f - scaledDist);
 	}
 
 	void UpdateScreenSpaceShader()
