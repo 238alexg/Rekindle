@@ -1,12 +1,19 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
-	const float SpeedModifier = 0.05f;
+	const float SpeedModifier = 5f;
+	const float ShellRadius = 0.01f;
 
 	public SpriteRenderer SpriteRenderer;
-	
+	public Rigidbody2D Rigidbody;
+
+	ContactFilter2D ContactFilter;
+	RaycastHit2D[] HitBuffer = new RaycastHit2D[16];
+	protected List<RaycastHit2D> HitBufferList = new List<RaycastHit2D>(16);
+
 	XboxOneController Controller;
 	Physics2DRaycaster Raycaster;
 
@@ -17,14 +24,17 @@ public class Player : MonoBehaviour
 
 	public void UpdatePlayerWithInput()
 	{
-		var currentDirection = Controller.GetAxis(XboxOneController.StickValue.LeftStick);
-		currentDirection *= SpeedModifier;
+		var movementVector = Controller.GetAxis(XboxOneController.StickValue.LeftStick);
+		movementVector *= SpeedModifier;
 
-		if (!DidHitCollider(currentDirection * 16))
-		{
-			transform.position += (Vector3)currentDirection;
-		}
+		var horizontalMove = movementVector;
+		horizontalMove.y = 0;
+		RequestMove(horizontalMove);
 
+		var verticalMove = movementVector;
+		verticalMove.x = 0;
+		RequestMove(verticalMove);
+		
 		// TODO: Update sprite renderer with a character movement animation
 
 		if (Application.Inst.EnableScreenSpaceDarkness)
@@ -33,25 +43,24 @@ public class Player : MonoBehaviour
 		}
 	}
 
-    bool DidHitCollider(Vector2 raycastVector)
+    void RequestMove(Vector2 requestedMoveVector)
     {
-		// Player's current starting position
-		Vector2 start = transform.position;
+	    float moveDistance = requestedMoveVector.magnitude;
 
-		// Calculate end position based on the direction parameters passed in when calling Move.
-		Vector2 end = new Vector2(transform.position.x + raycastVector.x, transform.position.y + raycastVector.y);
-		RaycastHit2D hit = Physics2D.Linecast(start, end);
+		int count = Rigidbody.Cast(requestedMoveVector, ContactFilter, HitBuffer, moveDistance + ShellRadius);
+		HitBufferList.Clear();
 
-		//Check if anything was hit
-
-		// TODO: If player hit an item, react differently than if they hit a wall
-		if (hit)
+		for (int i = 0; i < count; i++)
 		{
-			return true;
+			HitBufferList.Add(HitBuffer[i]);
 		}
-		else
+
+	    foreach (var raycastHit2D in HitBufferList)
 		{
-			return false;
+			float modifiedDistance = raycastHit2D.distance - ShellRadius;
+			moveDistance = modifiedDistance < moveDistance ? modifiedDistance : moveDistance;
 		}
+
+		Rigidbody.position = Rigidbody.position + requestedMoveVector.normalized * moveDistance;
 	}  
 }
