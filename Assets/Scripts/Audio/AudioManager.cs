@@ -17,9 +17,12 @@ public class AudioManager : MonoBehaviour
             if(_Inst == null)
             {
                 _Inst = value;
+                SFXPlayer = _Inst.gameObject.AddComponent<AudioSource>();
             }
         }
     }
+
+    static AudioSource SFXPlayer;
 
     public void Start()
     {
@@ -32,14 +35,12 @@ public class AudioManager : MonoBehaviour
         MusicPlayer.Inst.TickTransport(Time.deltaTime);
     }
 
-    static readonly AudioSource SFXPlayer = new AudioSource();
-
-    public static void PlayEffect(AudioClip clip)
+    public void PlayEffect(AudioClip clip)
     {
-        PlayEffect(clip, 1f, 1f);
+        Inst.PlayEffect(clip, 1f, 1f);
     }
 
-    public static void PlayEffect(AudioClip clip, 
+    public void PlayEffect(AudioClip clip, 
                                 float frequency, float amplitude, 
                                 float pitchJitter = 0f, float ampJitter = 0f)
     {
