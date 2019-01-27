@@ -45,7 +45,8 @@ public class Application : MonoBehaviour
 		Debug.Assert(Floors != null, "Floors Tilemap not assigned in Application");
 		World = new World(TileFinder, Walls, Floors);
 
-		World.CreateRoom(Vector2Int.zero, Vector2Int.one * 5, new Vector2Int[] {new Vector2Int(2, 4), new Vector2Int(4, 2)});
+		// World.CreateRoom(Vector2Int.zero, Vector2Int.one * 5, new Vector2Int[] {new Vector2Int(2, 4), new Vector2Int(4, 2)});
+		World.CreateBetaMap();
 	}
 
 	void OnBothControllersInitialized()
@@ -86,5 +87,7 @@ public class Application : MonoBehaviour
 		int dataSeparator = loadedWorld.IndexOf("+", 0);
 		string mapData = loadedWorld.Substring (0, dataSeparator);
 		string characterData = loadedWorld.Substring (dataSeparator, loadedWorld.Length - dataSeparator);
+		World.LoadFromString(mapData);
+
 	}
 }
