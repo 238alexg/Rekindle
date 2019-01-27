@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Application : MonoBehaviour
@@ -62,6 +62,15 @@ public class Application : MonoBehaviour
 		PlayerTwo.UpdatePlayerWithInput();
 
 		UpdateScreenSpaceShader();
+
+        Vector3 playerDistance = PlayerTwo.transform.position - PlayerOne.transform.position;
+
+        float sqrPlayerDist = Vector3.SqrMagnitude(playerDistance);
+
+        float maxDist = 500 * 500 + 350 * 350;
+        float scaledDist = sqrPlayerDist / maxDist;
+
+        MusicPlayer.Inst.UpdateMood(1f - scaledDist);
 	}
 
 	void UpdateScreenSpaceShader()
@@ -85,7 +94,7 @@ public class Application : MonoBehaviour
 		string loadedWorld = JsonSaver.Load("");
 		int dataSeparator = loadedWorld.IndexOf("+", 0);
 		string mapData = loadedWorld.Substring (0, dataSeparator);
-		string characterData = loadedWorld.Substring (dataSeparator, loadedWorld.Length - dataSeparator);
+        string characterData = loadedWorld.Substring(dataSeparator, loadedWorld.Length - dataSeparator);
 		World.LoadFromString(mapData);
 	}
 }
