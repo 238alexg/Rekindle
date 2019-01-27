@@ -12,17 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abc55a6e100fe489191cdc470bc0c00e, type: 3}
   m_Name: AudioClipCache
   m_EditorClassIdentifier: 
-  DrumLoop: {fileID: 0}
-  ShakerLoop: {fileID: 0}
-  HappyBassLoop: {fileID: 0}
-  SadBassLoop: {fileID: 0}
-  HappyPianoLoop: {fileID: 0}
-  SadPianoLoop: {fileID: 0}
-  HappyHornLoop: {fileID: 0}
-  SadHornLoop: {fileID: 0}
-  HappyMainMelodyLoop: {fileID: 0}
-  SadMainMelodyLoop: {fileID: 0}
-  HappyCounterMelodyLoop: {fileID: 0}
-  SadCounterMelodyLoop: {fileID: 0}
-  HappyGlockLoop: {fileID: 0}
-  SadGlockLoop: {fileID: 0}
+  DrumLoop: {fileID: 8300000, guid: 30cb01d8676e24d2887e0d36907854f4, type: 3}
+  ShakerLoop: {fileID: 8300000, guid: 3e06f04b6cbf44157bc5f32abb825386, type: 3}
+  HappyBassLoop: {fileID: 8300000, guid: 673b0ffc220a6425e96de099a53ac1d1, type: 3}
+  SadBassLoop: {fileID: 8300000, guid: 952b4d35d3b994d5196367ad9d20c244, type: 3}
+  HappyPianoLoop: {fileID: 8300000, guid: 026b560a2780b4aee86c4f476ddcd423, type: 3}
+  SadPianoLoop: {fileID: 8300000, guid: 1915d4322c2244b9f91f2ef77908f39a, type: 3}
+  HappyHornLoop: {fileID: 8300000, guid: 5b8e808ed2182461583092d28b7f7d07, type: 3}
+  SadHornLoop: {fileID: 8300000, guid: 507a3e55047d0421ea1a52ad9b3c337e, type: 3}
+  HappyMainMelodyLoop: {fileID: 8300000, guid: 138fc21d2e6f34e24bff58ff87afd97f, type: 3}
+  SadMainMelodyLoop: {fileID: 8300000, guid: 744e49b6d51fe48d884f6815d66c2f0f, type: 3}
+  HappyCounterMelodyLoop: {fileID: 8300000, guid: 66d82eedffc4d42d7aeb7507ac0f3c52,
+    type: 3}
+  SadCounterMelodyLoop: {fileID: 8300000, guid: b1a40b2eb1a444a008d80059cc317089,
+    type: 3}
+  HappyGlockLoop: {fileID: 8300000, guid: e60b59c25f38b4558aef7850522c9d58, type: 3}
+  SadGlockLoop: {fileID: 8300000, guid: 6c96f0ed289394671bd1d05a1f89837b, type: 3}
