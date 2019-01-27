@@ -19,7 +19,7 @@ public class World
 	Vector2Int ScreenSize = new Vector2Int(Screen.width, Screen.height);
 	Vector2Int TileDimensions;
 	Vector2Int RoomCount;
-	Vector2Int RoomSize = new Vector2Int(6, 4);
+	Vector2Int RoomSize = new Vector2Int(7, 7);
 	
 	public World(TileFinder tileFinder, Tilemap wallTileMap, Tilemap floorTileMap, Tilemap itemTilemap, Tilemap obstacleTilemap)
 	{
@@ -47,7 +47,7 @@ public class World
 
 		if (RoomCount.x * RoomSize.x * TileSize < Screen.width)
 		{
-			cameraPos.x += (Screen.width - RoomCount.x * RoomSize.x * TileSize) / 2;
+			cameraPos.x -= (Screen.width - RoomCount.x * RoomSize.x * TileSize) / 2;
 		}
 		if (RoomCount.y * RoomSize.y * TileSize < Screen.height)
 		{
