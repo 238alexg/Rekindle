@@ -4,23 +4,23 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu]
 public class ItemActivation : ScriptableObject
 {
-	public TileBase ButtonBlue;
-	public TileBase ButtonGreen;
-	public TileBase ButtonRed;
-	public TileBase ButtonStone;
-	public TileBase ButtonBluePressed;
-	public TileBase ButtonGreenPressed;
-	public TileBase ButtonRedPressed; 
-	public TileBase ButtonStonePressed;
-	public TileBase Lever;
-	public TileBase LeverActivated;
-	public TileBase Torch;
-	public TileBase KeyBlue;
-	public TileBase KeyGreen;
-	public TileBase KeyRed;
-	public TileBase KeyYellow;
+	public ItemTile ButtonBlue;
+	public ItemTile ButtonGreen;
+	public ItemTile ButtonRed;
+	public ItemTile ButtonStone;
+	public ItemTile ButtonBluePressed;
+	public ItemTile ButtonGreenPressed;
+	public ItemTile ButtonRedPressed; 
+	public ItemTile ButtonStonePressed;
+	public ItemTile Lever;
+	public ItemTile LeverActivated;
+	public ItemTile Torch;
+	public ItemTile KeyBlue;
+	public ItemTile KeyGreen;
+	public ItemTile KeyRed;
+	public ItemTile KeyYellow;
 
-	public TileBase GetItem(Item.ItemType type)
+	public ItemTile GetItem(Item.ItemType type)
 	{
 		switch(type)
 		{

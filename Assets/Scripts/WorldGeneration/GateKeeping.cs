@@ -12,13 +12,13 @@ public class GateKeeping : ScriptableObject
 		Yellow
 	}
 
-	public TileBase BlueDoor;
-	public TileBase GreenDoor;
-	public TileBase RedDoor;
-	public TileBase YellowDoor;
-	public TileBase Open; 
+	public ItemTile BlueDoor;
+	public ItemTile GreenDoor;
+	public ItemTile RedDoor;
+	public ItemTile YellowDoor;
+	public ItemTile Open; 
 
-	public TileBase GetDoor(DoorColor color)
+	public ItemTile GetDoor(DoorColor color)
 	{
 		switch(color)
 		{
