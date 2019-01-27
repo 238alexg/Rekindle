@@ -2,16 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SceneLoader : MonoBehaviour
 {
     public AudioSource AudioPlayer;
-    
-    public void LoadScene(int level)
+    private static Canvas StartCanvas;
+    private static Canvas DeveloperCanvas;
+    private bool clicked;
+
+    private void Start()
     {
-        while(AudioPlayer.isPlaying)
-        {
-            ;
-        }
-        UnityEngine.Application.LoadLevel(level);
+        StartCanvas = GetComponent<Canvas>();
+        StartCanvas.enabled = true;
+        DeveloperCanvas = GetComponent<Canvas>();
+        DeveloperCanvas.enabled = true;
+    }
+
+    public void DisableCanvas()
+    {
+         StartCanvas.enabled = false;
+    }
+
+    public void EnableCanvas()
+    {
+        DeveloperCanvas.enabled = true;
     }
 }
