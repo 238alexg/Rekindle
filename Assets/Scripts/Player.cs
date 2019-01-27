@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
 	public SpriteRenderer SpriteRenderer;
 	public Rigidbody2D Rigidbody;
 
+	public Animator Animator;
+
 	[NonSerialized] public readonly List<Item> Inventory = new List<Item>();
 
 	ContactFilter2D ContactFilter;
@@ -75,14 +77,17 @@ public class Player : MonoBehaviour
 	{
 		if (joystickVector == Vector2.zero)
 		{
+			Animator.SetInteger("State", 0);
 			return CurrentDirection;
 		}
 		else if (Mathf.Abs(joystickVector.x) > Mathf.Abs(joystickVector.y))
 		{
+			Animator.SetInteger("State", joystickVector.x > 0 ? 2 : 4);
 			return joystickVector.x > 0 ? Direction.East : Direction.West;
 		}
 		else
 		{
+			Animator.SetInteger("State", joystickVector.y > 0 ? 1 : 3);
 			return joystickVector.y > 0 ? Direction.North : Direction.South;
 		}
 	}

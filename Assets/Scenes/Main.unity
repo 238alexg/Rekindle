@@ -256,6 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpriteRenderer: {fileID: 449106342}
   Rigidbody: {fileID: 449106344}
+  Animator: {fileID: 449106346}
 --- !u!50 &449106344
 Rigidbody2D:
   serializedVersion: 4
@@ -347,6 +348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpriteRenderer: {fileID: 489220993}
   Rigidbody: {fileID: 489220994}
+  Animator: {fileID: 489220997}
 --- !u!212 &489220993
 SpriteRenderer:
   m_ObjectHideFlags: 0
