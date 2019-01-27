@@ -24,26 +24,26 @@ public class WallOrientations : ScriptableObject
         LowerLeftCorner
 	}
 
-	public Tilebase  NorthFacingWall;
-	public Tilebase  NorthwestFacingWall;
-	public Tilebase  NortheastFacingWall;
-	public Tilebase  WestFacingWall;
-	public Tilebase  EastFacingWall;
-	public Tilebase  SouthFacingWall;
-	public Tilebase  SouthwestFacingWall;
-	public Tilebase  SoutheastFacingWall;
+	public TileBase  NorthFacingWall;
+	public TileBase  NorthwestFacingWall;
+	public TileBase  NortheastFacingWall;
+	public TileBase  WestFacingWall;
+	public TileBase  EastFacingWall;
+	public TileBase  SouthFacingWall;
+	public TileBase  SouthwestFacingWall;
+	public TileBase  SoutheastFacingWall;
 
-    public Tilebase InnerNorthWestFacingWall;
-    public Tilebase InnerNorthEastFacingWall;
-    public Tilebase InnerSouthEastFacingWall;
-    public Tilebase InnerSouthWestFacingWall;
+    public TileBase InnerNorthWestFacingWall;
+    public TileBase InnerNorthEastFacingWall;
+    public TileBase InnerSouthEastFacingWall;
+    public TileBase InnerSouthWestFacingWall;
 
-    public Tilebase UpperLeftCorner;
-    public Tilebase UpperRightCorner;
-    public Tilebase LowerRightCorner;
-    public Tilebase LowerLeftCorner;
+    public TileBase UpperLeftCorner;
+    public TileBase UpperRightCorner;
+    public TileBase LowerRightCorner;
+    public TileBase LowerLeftCorner;
 
-	public Tilebase  GetWall(WallDirection direction)
+	public TileBase  GetWall(WallDirection direction)
 	{
 		switch (direction)
 		{
