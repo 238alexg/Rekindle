@@ -11,11 +11,51 @@ public class TileFinder : ScriptableObject
 	public WallOrientations HappyStoneWalls;
 	public WallOrientations SadStoneWalls;
 
-	public TileBase KeyBlue;
-	public TileBase KeyGreen;
-	public TileBase KeyRed;
-	public TileBase KeyYellow;
+	public ItemActivation Activated;
+	public ItemActivation NotActivatedYet;
 
+	public GateKeeping Open;
+	public GateKeeping Close;
+}
+
+[CreateAssetMenu]
+public class GateKeeping : ScriptableObject
+{
+	public enum DoorColor
+	{
+		Blue,
+		Green,
+		Red,
+		Yellow
+	}
+
+	public TileBase BlueDoor;
+	public TileBase GreenDoor;
+	public TileBase RedDoor;
+	public TileBase YellowDoor;
+
+	public TileBase GetDoor(DoorColor color)
+	{
+		switch(color)
+		{
+			case DoorColor.Blue:
+				return BlueDoor;
+			case DoorColor.Green:
+				return GreenDoor;
+			case DoorColor.Red:
+				return RedDoor;
+			case DoorColor.Yellow:
+				return YellowDoor;
+			default:
+				return null;
+		}
+	}
+
+
+}
+[CreateAssetMenu]
+public class ItemActivation : ScriptableObject
+{
 	public TileBase ButtonBlue;
 	public TileBase ButtonGreen;
 	public TileBase ButtonRed;
@@ -24,6 +64,11 @@ public class TileFinder : ScriptableObject
 
 	public TileBase Lever;
 	public TileBase Torch;
+
+	public TileBase KeyBlue;
+	public TileBase KeyGreen;
+	public TileBase KeyRed;
+	public TileBase KeyYellow;
 
 	public TileBase GetItem(Item.ItemType type)
 	{
