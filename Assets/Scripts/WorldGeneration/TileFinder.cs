@@ -25,48 +25,40 @@ public class TileFinder : ScriptableObject
 	public TileBase Lever;
 	public TileBase Torch;
 
-	public TileBase GetItem(ItemType type)
+	public TileBase GetItem(Item.ItemType type)
 	{
 		switch(type)
 		{
-			case ButtoBlue:
+			case Item.ItemType.ButtonBlue:
 				return ButtonBlue;
-				break;
-			case ButtonGreen:
+			case Item.ItemType.ButtonGreen:
 				return ButtonGreen;
-				break;
-			case ButtonRed:
+			case Item.ItemType.ButtonRed:
 				return ButtonRed;
-				break;
-			case ButtonStone:
+			case Item.ItemType.ButtonStone:
 				return ButtonStone;
-				break;
-			case ButtonYellow:
+			case Item.ItemType.ButtonYellow:
 				return ButtonYellow;
-				break;
-			case KeyBlue:
+			case Item.ItemType.KeyBlue:
 				return KeyBlue;
-				break;
-			case KeyGreen:
+			case Item.ItemType.KeyGreen:
 				return KeyGreen;
-				break;
-			case KeyRed:
+			case Item.ItemType.KeyRed:
 				return KeyRed;
-				break;
-			case KeyYellow:
+			case Item.ItemType.KeyYellow:
 				return KeyYellow;
-				break;
-			case Lever:
+			case Item.ItemType.Lever:
 				return Lever;
-				break;
-			case Torch:
+			case Item.ItemType.Torch:
 				return Torch;
-				break;
+			default:
+				return null;
 		}
 	}
 }
 
-class WallOrientations : ScriptableObject
+[CreateAssetMenu]
+public class WallOrientations : ScriptableObject
 {
 	public enum WallDirection
 	{
@@ -77,7 +69,7 @@ class WallOrientations : ScriptableObject
 		East,
 		South,
 		Southwest,
-		SouthEast
+		Southeast
 	}
 
 	public TileBase NorthFacingWall;
@@ -89,35 +81,28 @@ class WallOrientations : ScriptableObject
 	public TileBase SouthwestFacingWall;
 	public TileBase SoutheastFacingWall;
 
-
 	public TileBase GetWall(WallDirection direction)
 	{
 		switch (direction)
 		{
-			case North:
+			case WallDirection.North:
 				return NorthFacingWall;
-				break;
-			case Northwest:
+			case WallDirection.Northwest:
 				return NorthwestFacingWall;
-				break;
-			case Northeast:
+			case WallDirection.Northeast:
 				return NortheastFacingWall;
-				break;
-			case West:
+			case WallDirection.West:
 				return WestFacingWall;
-				break;
-			case East:
+			case WallDirection.East:
 				return EastFacingWall;
-				break;
-			case South:
+			case WallDirection.South:
 				return SouthFacingWall;
-				break;
-			case Southwest:
+			case WallDirection.Southwest:
 				return SouthwestFacingWall;
-				break;
-			case Southeast:
+			case WallDirection.Southeast:
 				return SoutheastFacingWall;
-				break;
+			default:
+				return null;
 		}
 	}
 }
