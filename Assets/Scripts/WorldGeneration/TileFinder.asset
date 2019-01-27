@@ -15,16 +15,9 @@ MonoBehaviour:
   Wall: {fileID: 11400000, guid: 0635bbfc320af0d42b8f952a66659096, type: 2}
   Floor: {fileID: 11400000, guid: 7551a86c0c297604b9025c1e9fd3fd60, type: 2}
   Door: {fileID: 11400000, guid: dc8cb7fbb470c0346a45dcf9c1b41d62, type: 2}
-  HappyStoneWalls: {fileID: 0}
-  SadStoneWalls: {fileID: 0}
-  KeyBlue: {fileID: 0}
-  KeyGreen: {fileID: 0}
-  KeyRed: {fileID: 0}
-  KeyYellow: {fileID: 0}
-  ButtonBlue: {fileID: 0}
-  ButtonGreen: {fileID: 0}
-  ButtonRed: {fileID: 0}
-  ButtonStone: {fileID: 0}
-  ButtonYellow: {fileID: 0}
-  Lever: {fileID: 0}
-  Torch: {fileID: 0}
+  HappyStoneWalls: {fileID: 11400000, guid: 595e3a3eb30852c469e84657fceb525e, type: 2}
+  SadStoneWalls: {fileID: 11400000, guid: 595e3a3eb30852c469e84657fceb525e, type: 2}
+  Activated: {fileID: 11400000, guid: f3ef10d50216a7e4cb5e2b32f5fb6b46, type: 2}
+  NotActivatedYet: {fileID: 11400000, guid: f3ef10d50216a7e4cb5e2b32f5fb6b46, type: 2}
+  Open: {fileID: 11400000, guid: 806adece9db257e4eb57b9e315f28b10, type: 2}
+  Close: {fileID: 11400000, guid: 806adece9db257e4eb57b9e315f28b10, type: 2}

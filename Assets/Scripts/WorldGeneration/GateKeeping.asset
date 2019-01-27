@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfaa97d1c91a16846b376ee1f342da99, type: 3}
   m_Name: GateKeeping
   m_EditorClassIdentifier: 
-  BlueDoor: {fileID: 0}
-  GreenDoor: {fileID: 0}
-  RedDoor: {fileID: 0}
-  YellowDoor: {fileID: 0}
-  Open: {fileID: 0}
+  BlueDoor: {fileID: 11400000, guid: 96f0b7d8272ce9943a8f67cf64cd2e9e, type: 2}
+  GreenDoor: {fileID: 11400000, guid: 73fc7f28adcb79f489dfda2779bca317, type: 2}
+  RedDoor: {fileID: 11400000, guid: 95441587fa2d1884eb490a6b30460369, type: 2}
+  YellowDoor: {fileID: 11400000, guid: b1b10a080422c01489b0125d592d8c36, type: 2}
+  Open: {fileID: 11400000, guid: 660134ddb84d1c743ab60e393eefe9fb, type: 2}
