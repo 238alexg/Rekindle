@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abc55a6e100fe489191cdc470bc0c00e, type: 3}
+  m_Name: AudioClipCache
+  m_EditorClassIdentifier: 
+  DrumLoop: {fileID: 0}
+  ShakerLoop: {fileID: 0}
+  HappyBassLoop: {fileID: 0}
+  SadBassLoop: {fileID: 0}
+  HappyPianoLoop: {fileID: 0}
+  SadPianoLoop: {fileID: 0}
+  HappyHornLoop: {fileID: 0}
+  SadHornLoop: {fileID: 0}
+  HappyMainMelodyLoop: {fileID: 0}
+  SadMainMelodyLoop: {fileID: 0}
+  HappyCounterMelodyLoop: {fileID: 0}
+  SadCounterMelodyLoop: {fileID: 0}
+  HappyGlockLoop: {fileID: 0}
+  SadGlockLoop: {fileID: 0}
