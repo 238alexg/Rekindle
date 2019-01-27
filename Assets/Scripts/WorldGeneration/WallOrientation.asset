@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77d30cfb43397843b4f3f822e67b4d4, type: 3}
   m_Name: WallOrientation
   m_EditorClassIdentifier: 
-  NorthFacingWall: {fileID: 0}
-  NorthwestFacingWall: {fileID: 0}
-  NortheastFacingWall: {fileID: 0}
-  WestFacingWall: {fileID: 0}
-  EastFacingWall: {fileID: 0}
-  SouthFacingWall: {fileID: 0}
-  SouthwestFacingWall: {fileID: 0}
-  SoutheastFacingWall: {fileID: 0}
+  NorthFacingWall: {fileID: 11400000, guid: 0635bbfc320af0d42b8f952a66659096, type: 2}
+  NorthwestFacingWall: {fileID: 11400000, guid: 640fa61d2825e2941937b7d39d71b562,
+    type: 2}
+  NortheastFacingWall: {fileID: 11400000, guid: 18455ba28a41a554a89199fb6294637a,
+    type: 2}
+  WestFacingWall: {fileID: 11400000, guid: b2f1fbeeedb8dfb4faaf6f37c510d289, type: 2}
+  EastFacingWall: {fileID: 11400000, guid: db2b95e2aa4a3da40a541f3598020fa0, type: 2}
+  SouthFacingWall: {fileID: 11400000, guid: 0244ac1fcab4cf64ebd9d0f9cefd9f4e, type: 2}
+  SouthwestFacingWall: {fileID: 11400000, guid: 8fa1c1387705e0b4384f3e4e178f92ad,
+    type: 2}
+  SoutheastFacingWall: {fileID: 11400000, guid: fc9e581c1d32cab428ee791f1a26e4ae,
+    type: 2}
