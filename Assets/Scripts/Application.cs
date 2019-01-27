@@ -4,6 +4,7 @@ using UnityEngine.Tilemaps;
 public class Application : MonoBehaviour
 {
 	public static Application Inst;
+    public AudioManager AudioManager;
 	public ScreenSpaceDarkness ScreenSpaceDarkness;
 	public bool EnableScreenSpaceDarkness = false;
 
@@ -63,6 +64,14 @@ public class Application : MonoBehaviour
 
 		PlayerOne.UpdatePlayerWithInput();
 		PlayerTwo.UpdatePlayerWithInput();
+
+        var dist = PlayerTwo.transform.position - PlayerOne.transform.position;
+
+        float mood = Vector3.SqrMagnitude(dist) / (500f * 500f + 230f * 230f);
+
+
+        MusicPlayer.Inst.UpdateMood(mood);
+
 
 		UpdateScreenSpaceShader();
 	}

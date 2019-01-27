@@ -2,112 +2,168 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-static class MusicPlayer
+public class MusicPlayer
 {
     static readonly float SecondsPerMeasure = 1f / 3f;
-    static float LoopTime = 0f;
-    static bool MeasureReached = false;
-    static bool UsingHappyChords = false;
 
-    static AudioSource Drums = new AudioSource();
-    static AudioSource Shakers = new AudioSource();
-    static AudioSource Bass = new AudioSource();
-    static AudioSource Piano = new AudioSource();
-    static AudioSource Horns = new AudioSource();
-    static AudioSource MainMelody = new AudioSource();
-    static AudioSource CounterMelody = new AudioSource();
-    static AudioSource Glock = new AudioSource();
-
-    static AudioClip DrumLoop;
-    static AudioClip ShakerLoop;
-    static AudioClip HappyBassLoop;
-    static AudioClip SadBassLoop;
-    static AudioClip HappyPianoLoop;
-    static AudioClip SadPianoLoop;
-    static AudioClip HappyHornLoop;
-    static AudioClip SadHornLoop;
-    static AudioClip HappyMainMelodyLoop;
-    static AudioClip SadMainMelodyLoop;
-    static AudioClip HappyCounterMelodyLoop;
-    static AudioClip SadCounterMelodyLoop;
-    static AudioClip HappyGlockLoop;
-    static AudioClip SadGlockLoop;
-
-    public static void InitializeClips(AudioClipCache audioClips)
+    static MusicPlayer _Inst;
+    static GameObject AudioTransportManager;
+    public static MusicPlayer Inst
     {
-        DrumLoop = audioClips.DrumLoop;
-        ShakerLoop = audioClips.ShakerLoop;
-        HappyBassLoop = audioClips.HappyBassLoop;
-        SadBassLoop = audioClips.SadBassLoop;
-        HappyPianoLoop = audioClips.HappyPianoLoop;
-        SadPianoLoop = audioClips.SadPianoLoop;
-        HappyHornLoop = audioClips.HappyHornLoop;
-        SadHornLoop = audioClips.SadHornLoop;
-        HappyMainMelodyLoop = audioClips.HappyMainMelodyLoop;
-        SadMainMelodyLoop = audioClips.SadMainMelodyLoop;
-        HappyCounterMelodyLoop = audioClips.HappyCounterMelodyLoop;
-        SadCounterMelodyLoop = audioClips.SadCounterMelodyLoop;
-        HappyGlockLoop = audioClips.HappyGlockLoop;
-        SadGlockLoop = audioClips.SadGlockLoop;
+        get
+        {
+            if (_Inst == null)
+            {
+                AudioTransportManager = AudioManager.Inst.gameObject;
+                _Inst = new MusicPlayer();
+            }
+            return _Inst;
+        }
+    }
 
-        loop = true;
+    float MeasureTime = 0f;
+    float CurrentMood = 0f;
+    bool MeasureReached = false;
+    bool UsingHappyChords = false;
+
+    AudioSource Drums;
+    AudioSource Shakers;
+    AudioSource Bass;
+    AudioSource Piano;
+    AudioSource Horns;
+    AudioSource MainMelody;
+    AudioSource CounterMelody;
+    AudioSource Glock;
+
+    AudioClip DrumLoop;
+    AudioClip ShakerLoop;
+    AudioClip HappyBassLoop;
+    AudioClip SadBassLoop;
+    AudioClip HappyPianoLoop;
+    AudioClip SadPianoLoop;
+    AudioClip HappyHornLoop;
+    AudioClip SadHornLoop;
+    AudioClip HappyMainMelodyLoop;
+    AudioClip SadMainMelodyLoop;
+    AudioClip HappyCounterMelodyLoop;
+    AudioClip SadCounterMelodyLoop;
+    AudioClip HappyGlockLoop;
+    AudioClip SadGlockLoop;
+
+    MusicPlayer()
+    {
+        Drums = AudioTransportManager.AddComponent<AudioSource>();
+        Shakers = AudioTransportManager.AddComponent<AudioSource>();
+        Bass = AudioTransportManager.AddComponent<AudioSource>();
+        Piano = AudioTransportManager.AddComponent<AudioSource>();
+        Horns = AudioTransportManager.AddComponent<AudioSource>();
+        MainMelody = AudioTransportManager.AddComponent<AudioSource>();
+        CounterMelody = AudioTransportManager.AddComponent<AudioSource>();
+        Glock = AudioTransportManager.AddComponent<AudioSource>();
+    }
+
+    public void InitializeClips(AudioClipCache audioClips)
+    {
+        Drums.clip = DrumLoop = audioClips.DrumLoop;
+        Shakers.clip = ShakerLoop = audioClips.ShakerLoop;
+        HappyBassLoop = audioClips.HappyBassLoop;
+        Bass.clip = SadBassLoop = audioClips.SadBassLoop;
+        HappyPianoLoop = audioClips.HappyPianoLoop;
+        Piano.clip = SadPianoLoop = audioClips.SadPianoLoop;
+        HappyHornLoop = audioClips.HappyHornLoop;
+        Horns.clip = SadHornLoop = audioClips.SadHornLoop;
+        HappyMainMelodyLoop = audioClips.HappyMainMelodyLoop;
+        MainMelody.clip = SadMainMelodyLoop = audioClips.SadMainMelodyLoop;
+        HappyCounterMelodyLoop = audioClips.HappyCounterMelodyLoop;
+        CounterMelody.clip = SadCounterMelodyLoop = audioClips.SadCounterMelodyLoop;
+        HappyGlockLoop = audioClips.HappyGlockLoop;
+        Glock.clip = SadGlockLoop = audioClips.SadGlockLoop;
+
+        IsLooping = true;
         Play();
     }
 
-    static AudioSource[] AudioSources = { Drums, Shakers, Bass, Piano, Horns, MainMelody, CounterMelody, Glock };
 
-    public static void TickTransport(float time)
+    public void TickTransport(float time)
     {
-        if (isPlaying)
+        if (IsPlaying)
         {
-            LoopTime += time;
+            MeasureTime += time;
 
-            if (LoopTime > SecondsPerMeasure)
+            if (MeasureTime > SecondsPerMeasure)
                 MeasureReached = true;
             else
                 MeasureReached = false;
 
-            LoopTime %= SecondsPerMeasure;
+            MeasureTime %= SecondsPerMeasure;
         }
     }
 
-    public static bool isPlaying
+    public bool IsPlaying
     {
         get
         {
-            return AudioSources[0].isPlaying;
+            return
+            Drums.isPlaying ||
+            Shakers.isPlaying ||
+            Bass.isPlaying ||
+            Piano.isPlaying ||
+            Horns.isPlaying ||
+            MainMelody.isPlaying ||
+            CounterMelody.isPlaying ||
+            Glock.isPlaying;
         }
     }
 
-    public static bool loop
+    public bool IsLooping
     {
         get
         {
-            return AudioSources[0].loop;
+            return
+            Drums.loop ||
+            Shakers.loop ||
+            Bass.loop ||
+            Piano.loop ||
+            Horns.loop ||
+            MainMelody.loop ||
+            CounterMelody.loop ||
+            Glock.loop;
         }
         set
         {
-            foreach (AudioSource source in AudioSources)
-                source.loop = value;
+            Drums.loop =
+            Shakers.loop =
+            Bass.loop =
+            Piano.loop =
+            Horns.loop =
+            MainMelody.loop =
+            CounterMelody.loop =
+            Glock.loop = value;
         }
     }
 
-    public static float time
+    public float SampleTime
     {
         get
         {
-            return AudioSources[0].time;
+            return Drums.time;
         }
         set
         {
-            foreach (AudioSource source in AudioSources)
-                source.time = value;
+            Drums.time =
+            Shakers.time =
+            Bass.time =
+            Piano.time =
+            Horns.time =
+            MainMelody.time =
+            CounterMelody.time =
+            Glock.time = value;
         }
     }
 
-    static void SwapChords()
+    void SwapChords()
     {
-        float loopTime = time;
+        float loopTime = SampleTime;
         if (UsingHappyChords)
         {
             Bass.clip = SadBassLoop;
@@ -128,14 +184,12 @@ static class MusicPlayer
             Glock.clip = HappyGlockLoop;
             UsingHappyChords = true;
         }
-        foreach (AudioSource source in AudioSources)
-        {
-            source.time = loopTime;
-            source.Play();
-        }
+        SampleTime = loopTime;
+        Play();
+
     }
 
-    public static IEnumerator SwapChordsAtNextMeasure()
+    public IEnumerator SwapChordsAtNextMeasure()
     {
         while (!MeasureReached)
             yield return null;
@@ -143,7 +197,7 @@ static class MusicPlayer
         SwapChords();
     }
 
-    public static void UpdateMood(float mood)
+    public void UpdateMood(float mood)
     {
         // 0f == despondent
         // 1f == good times
@@ -155,13 +209,34 @@ static class MusicPlayer
         CounterMelody.volume = mood < 0.5f ? Mathf.Lerp(0f, .5f, 2 * mood) : Mathf.Lerp(1f, 0f, mood);
         Shakers.volume = Mathf.Lerp(0f, .75f, mood);
 
-        loop = true;
+        if (CurrentMood < 0.75f && mood > 0.75f || CurrentMood > 0.75f && mood < 0.75f)
+            Application.Inst.StartCoroutine(SwapChordsAtNextMeasure());
+
+        CurrentMood = mood;    
     }
 
-    public static void Play()
+    public void Play()
     {
-        foreach (AudioSource source in AudioSources)
-            source.Play();
+        Drums.Play();
+        Shakers.Play();
+        Bass.Play();
+        Piano.Play();
+        Horns.Play();
+        MainMelody.Play();
+        CounterMelody.Play();
+        Glock.Play();
+    }
+
+    public void Pause()
+    {
+        Drums.Pause();
+        Shakers.Pause();
+        Bass.Pause();
+        Piano.Pause();
+        Horns.Pause();
+        MainMelody.Pause();
+        CounterMelody.Pause();
+        Glock.Pause();
     }
 
 }
