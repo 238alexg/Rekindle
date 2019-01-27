@@ -42,7 +42,8 @@ public class Player : MonoBehaviour
 
 		if (Application.Inst.EnableScreenSpaceDarkness)
 		{
-			Application.Inst.ScreenSpaceDarkness.AddLight(transform.position, radius: 0.2f, new Color(0.8f, 0.2f, 0.2f, 0.3f));
+			var screenPixel = World.WorldSpaceToScreenPixel(transform.position);
+			Application.Inst.ScreenSpaceDarkness.AddLight(screenPixel, radius: 0.2f, new Color(0.8f, 0.2f, 0.2f, 0.3f));
 		}
 	}
 
