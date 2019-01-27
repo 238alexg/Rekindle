@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PCControllerManager : ControllerManager
+﻿public class PCControllerManager : ControllerManager
 {
 	protected override void UpdateControllers()
 	{

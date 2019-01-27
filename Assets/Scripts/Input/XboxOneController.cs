@@ -64,7 +64,7 @@ public class XboxOneController
 
 	public XboxOneController(bool isPlayerOne, string joystickName)
 	{
-		IsPlayerOne = true;
+		IsPlayerOne = isPlayerOne;
 		JoystickName = joystickName;
 
 		LeftStickHorizontalTag = "Joy" + (IsPlayerOne ? "1" : "2") + "_LeftStickHorizontal";
