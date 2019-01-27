@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Application : MonoBehaviour
 {
@@ -6,8 +7,17 @@ public class Application : MonoBehaviour
 	public ScreenSpaceDarkness ScreenSpaceDarkness;
 	public bool EnableScreenSpaceDarkness = false;
 
+	public World World;
+
 	public Player PlayerOne;
 	public Player PlayerTwo;
+
+	public TileFinder TileFinder;
+
+	public Tilemap Walls;
+	public Tilemap Floors;
+	public Tilemap Items;
+	public Tilemap Obstacles;
 
 #if USE_XB1_CONTROLLERS
 	readonly ControllerManager ControllerManager = new XboxControllerManager();
@@ -32,6 +42,10 @@ public class Application : MonoBehaviour
 	{
 		Debug.Assert(ScreenSpaceDarkness != null, "No screen space darkness script attached to Application");
 		ControllerManager.BothControllersInitializedEvent += OnBothControllersInitialized;
+
+		Debug.Assert(Walls != null, "Walls Tilemap not assigned in Application");
+		Debug.Assert(Floors != null, "Floors Tilemap not assigned in Application");
+		World = new World(TileFinder, Walls, Floors, Items, Obstacles);
 	}
 
 	void OnBothControllersInitialized()
@@ -68,17 +82,10 @@ public class Application : MonoBehaviour
 
 		void Loader()
 	{
-<<<<<<< HEAD
 		string loadedWorld = JsonSaver.Load("");
 		int dataSeparator = loadedWorld.IndexOf("+", 0);
 		string mapData = loadedWorld.Substring (0, dataSeparator);
-		string characterData = loadedWorld.Substring (dataSeparator, loadedWorld.Length - dataSeparator);
-=======
-		string loadedWorld = JsonSaver.load();
-		int dataSeparator = loadedWorld.IndexOf("+", 0);
-		string mapData = loadedWorld.Substring (0, dataSeparator);
-		string characterData = loadedWorld.Substring (dataSeparator, loadedWorld.Length - dataSeparator);
-		
->>>>>>> 09ee793... change Loader function in application.cs
+        string characterData = loadedWorld.Substring(dataSeparator, loadedWorld.Length - dataSeparator);
+		World.LoadFromString(mapData);
 	}
 }

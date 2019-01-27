@@ -1,22 +1,33 @@
-﻿    using System.Collections;
-    using System.Collections.Generic;
-    using System.IO;
-    using UnityEngine;
-    public static class JsonSaver
+﻿using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+public static class JsonSaver
+{
+    static void Save (string path = null, List<Vector2> characterData = null, HashSet<Space> mapData = null)
     {
-    static void Save (string path = null, List<Vector2> characterData = null, List<Room> mapData = null)
-    {
-        string characterDataStringified = characterData.ToString();
-        string mapDataStringified = mapData.ToString();
-        string data = mapDataStringified + "+" + mapDataStringified; 
-        string jsonString = JsonUtility.ToJson (data);
-        if (path == null) {
+        string characterString = JsonUtility.ToJson(characterData);
+        string mapdataString = GetMapData(mapData);
+
+        if (path == null) 
+        {
             path = Path.Combine(UnityEngine.Application.persistentDataPath, "save.txt");
         }
+
         using (StreamWriter streamWriter = File.CreateText (path))
         {
-            streamWriter.Write (jsonString);
+            streamWriter.Write (mapdataString + "+" + characterString);
         }
+    }
+
+    static string GetMapData(HashSet<Space> spaces)
+    {
+        string mapString = "[";
+
+        foreach(Space space in spaces)
+        {
+            mapString += JsonUtility.ToJson(space);
+        }
+        return  mapString + "]";
     }
 
     public static string Load (string path)
@@ -27,3 +38,4 @@
         }
     }
 }
+
