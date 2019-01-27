@@ -35,6 +35,7 @@
 			float4 _LightPositions[10];
 			float _LightRadii[10];
 			float4 _LightColors[10];
+			float2 _TextureSize;
 
 			v2f vert (appdata v)
 			{
@@ -70,6 +71,7 @@
 						lightColor = (lightColor * lightOverlaps) + _LightColors[i];
 						lightOverlaps += 1;
 						lightColor /= lightOverlaps;
+						lightColor.a -= _LightColors[i].a;
 					}
 					else
 					{

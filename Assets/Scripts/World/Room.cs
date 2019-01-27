@@ -7,12 +7,14 @@ public class Room
 	public bool Explored;
 	
 	public Item Item;
-	List<Entrance> Entrances;
+	public List<Entrance> Entrances;
+	public Vector2Int RoomIndex;
 
-	public Room(int width, int height)
+	public Room(int width, int height, Vector2Int roomIndex)
 	{
 		Width = width;
 		Height = height;
+		RoomIndex = roomIndex;
 		Explored = false;
 		Entrances = new List<Entrance>(4);
 	}

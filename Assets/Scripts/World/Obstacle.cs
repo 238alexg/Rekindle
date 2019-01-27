@@ -8,12 +8,12 @@ using UnityEditor;
 
 public class Obstacle : Tile, IAButtonHandler, IBButtonHandler
 {
-	public event Action<bool> ObstacleLockChangedEvent = delegate { };
+	public event Action<Obstacle> ObstacleLockChangedEvent = delegate { };
 
 	public Item Solution;
 	public Vector3Int Position;
 
-	bool Unlocked = false;
+	public bool Unlocked = false;
 	
 	void TryUnlockObstacle(Player player)
 	{
@@ -28,7 +28,7 @@ public class Obstacle : Tile, IAButtonHandler, IBButtonHandler
 
 	public void RelockObstacle()
 	{
-		ObstacleLockChangedEvent(false);
+		ObstacleLockChangedEvent(this);
 	}
 
 	public void SubscribeToLever()
@@ -39,7 +39,7 @@ public class Obstacle : Tile, IAButtonHandler, IBButtonHandler
 	void UnlockObstacle()
 	{
 		Unlocked = true;
-		ObstacleLockChangedEvent(true);
+		ObstacleLockChangedEvent(this);
 	}
 
 	public void OnAButtonPress(Player player)

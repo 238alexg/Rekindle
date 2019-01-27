@@ -27,6 +27,7 @@ public class ScreenSpaceDarkness : MonoBehaviour
 	{
 		Debug.Assert(ScreenSpaceSprite != null, "No sprite renderer attached to ScreenSpaceDarkness script");
 		ScreenSpaceMaterial = ScreenSpaceSprite.material;
+		ScreenSpaceMaterial.SetVector("_TextureSize", new Vector4(Screen.width, Screen.height));
 	}
 	
 	public void UpdateTextureWithLights()
