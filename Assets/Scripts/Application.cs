@@ -4,7 +4,6 @@ using UnityEngine.Tilemaps;
 public class Application : MonoBehaviour
 {
 	public static Application Inst;
-    public AudioManager AudioManager;
 	public ScreenSpaceDarkness ScreenSpaceDarkness;
 	public bool EnableScreenSpaceDarkness = false;
 
@@ -46,10 +45,7 @@ public class Application : MonoBehaviour
 
 		Debug.Assert(Walls != null, "Walls Tilemap not assigned in Application");
 		Debug.Assert(Floors != null, "Floors Tilemap not assigned in Application");
-		World = new World(TileFinder, Walls, Floors);
-
-		// World.CreateRoom(Vector2Int.zero, Vector2Int.one * 5, new Vector2Int[] {new Vector2Int(2, 4), new Vector2Int(4, 2)});
-		World.CreateBetaMap();
+		World = new World(TileFinder, Walls, Floors, Items, Obstacles);
 	}
 
 	void OnBothControllersInitialized()
@@ -64,14 +60,6 @@ public class Application : MonoBehaviour
 
 		PlayerOne.UpdatePlayerWithInput();
 		PlayerTwo.UpdatePlayerWithInput();
-
-        var dist = PlayerTwo.transform.position - PlayerOne.transform.position;
-
-        float mood = Vector3.SqrMagnitude(dist) / (500f * 500f + 230f * 230f);
-
-
-        MusicPlayer.Inst.UpdateMood(mood);
-
 
 		UpdateScreenSpaceShader();
 	}
