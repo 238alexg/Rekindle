@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 449106342}
   - component: {fileID: 449106345}
   - component: {fileID: 449106344}
+  - component: {fileID: 449106346}
   m_Layer: 2
   m_Name: PlayerOne
   m_TagString: Untagged
@@ -230,7 +231,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a921a79e2d598f34893addc0c7d86fe3, type: 3}
+  m_Sprite: {fileID: 21300008, guid: ef570b519e9068e4cbeaf694aed1b671, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -289,9 +290,28 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.75, y: 0.75}
+  m_Offset: {x: -0.06, y: 0.45}
+  m_Size: {x: 0.41, y: 0.75}
   m_Direction: 0
+--- !u!95 &449106346
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449106340}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8231607814dee68489df2e7866e1c15b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &489220991
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +325,7 @@ GameObject:
   - component: {fileID: 489220993}
   - component: {fileID: 489220995}
   - component: {fileID: 489220994}
+  - component: {fileID: 489220997}
   m_Layer: 2
   m_Name: PlayerTwo
   m_TagString: Untagged
@@ -363,7 +384,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: a921a79e2d598f34893addc0c7d86fe3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ef570b519e9068e4cbeaf694aed1b671, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -408,8 +429,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.75, y: 0.75}
+  m_Offset: {x: -0.06, y: 0.45}
+  m_Size: {x: 0.41, y: 0.75}
   m_Direction: 0
 --- !u!4 &489220996
 Transform:
@@ -425,6 +446,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &489220997
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489220991}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 93a74cee6d3365d4ca2c589966988818, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
