@@ -191,7 +191,7 @@ Transform:
   m_LocalScale: {x: 32, y: 32, z: -7}
   m_Children: []
   m_Father: {fileID: 1410836352}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &449106342
 SpriteRenderer:
@@ -423,7 +423,7 @@ Transform:
   m_LocalScale: {x: 32, y: 32, z: -7}
   m_Children: []
   m_Father: {fileID: 1410836352}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -477,7 +477,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 540
+  orthographic size: 150
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2552,6 +2552,75 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &930032812
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1410836352}
+    m_Modifications:
+    - target: {fileID: 3803439054650198781, guid: 670cc5bd27da84e83ad47eed43a440b2,
+        type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149437311064273349, guid: 670cc5bd27da84e83ad47eed43a440b2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149437311064273349, guid: 670cc5bd27da84e83ad47eed43a440b2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149437311064273349, guid: 670cc5bd27da84e83ad47eed43a440b2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149437311064273349, guid: 670cc5bd27da84e83ad47eed43a440b2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149437311064273349, guid: 670cc5bd27da84e83ad47eed43a440b2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149437311064273349, guid: 670cc5bd27da84e83ad47eed43a440b2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149437311064273349, guid: 670cc5bd27da84e83ad47eed43a440b2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149437311064273349, guid: 670cc5bd27da84e83ad47eed43a440b2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149437311064273349, guid: 670cc5bd27da84e83ad47eed43a440b2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149437311064273349, guid: 670cc5bd27da84e83ad47eed43a440b2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149437311064273349, guid: 670cc5bd27da84e83ad47eed43a440b2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 670cc5bd27da84e83ad47eed43a440b2, type: 3}
 --- !u!1 &1003147869
 GameObject:
   m_ObjectHideFlags: 0
@@ -2861,7 +2930,7 @@ Transform:
   m_LocalScale: {x: 1920, y: 1080, z: 1}
   m_Children: []
   m_Father: {fileID: 1410836352}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1090106696
 MonoBehaviour:
@@ -3138,6 +3207,7 @@ Transform:
   m_LocalPosition: {x: -0.05034686, y: -0.56251484, z: -0.03515625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1998532583}
   - {fileID: 1090106695}
   - {fileID: 449106341}
   - {fileID: 489220996}
@@ -3156,6 +3226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff11176c8ae413439b82ad4b842e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioManager: {fileID: 1998532584}
   ScreenSpaceDarkness: {fileID: 1090106696}
   EnableScreenSpaceDarkness: 0
   PlayerOne: {fileID: 449106343}
@@ -3165,3 +3236,21 @@ MonoBehaviour:
   Floors: {fileID: 899995157}
   Items: {fileID: 1145967695}
   Obstacles: {fileID: 1003147875}
+--- !u!4 &1998532583 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4149437311064273349, guid: 670cc5bd27da84e83ad47eed43a440b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 930032812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1998532584 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2250047494949234046, guid: 670cc5bd27da84e83ad47eed43a440b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 930032812}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e0d0fb1a0fea49649df2ab526419360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
