@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-public class Item : Entity
+public class Item
 {
     public enum ItemType
     {

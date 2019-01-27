@@ -65,7 +65,9 @@ public class Player : MonoBehaviour
 
 		if (Application.Inst.EnableScreenSpaceDarkness)
 		{
-			Application.Inst.ScreenSpaceDarkness.AddLight(transform.position, radius: 0.2f, new Color(0.8f, 0.2f, 0.2f, 0.3f));
+			var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
+			var normalizedScreenSpace = new Vector2(screenPoint.x / Screen.width, screenPoint.y / Screen.height);
+			Application.Inst.ScreenSpaceDarkness.AddLight(normalizedScreenSpace, radius: 0.2f, new Color(0.8f, 0.2f, 0.2f, 0.3f));
 		}
 	}
 
