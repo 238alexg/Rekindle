@@ -49,6 +49,7 @@ public class World
 		int keyXPosition = position.x;
 		int keyYPosition = position.y;
 		Vector3Int keyPlacement = new Vector3Int(keyXPosition, keyYPosition, 0);
+		Key.SetTile(KeyPlacement, TileFinder.Key);
 		// TODO: SET TILE
 	}
 
@@ -58,6 +59,7 @@ public class World
 		int LeverXPosition = position.x;
 		int LeverYPosition = position.y;
 		Vector3Int LeverPlacement = new Vector3Int(LeverXPosition, LeverYPosition, 0);
+		// Lever.SetTile(LeverPlacement, TileFinder.Lever);
 		// TODO: SET TILE
 	}
 
@@ -65,7 +67,8 @@ public class World
 	{
 		int keyXPosition = position.x;
 		int keyYPosition = position.y;
-		Vector3Int keyPlacement = new Vector3Int(keyXPosition, keyYPosition, 0);
+		Vector3Int doorPlacement = new Vector3Int(keyXPosition, keyYPosition, 0);
+		// Door.SetTile(doorPlacement, TileFinder.Door);
 		// TODO: SET TILE
 	}
 	public void AddRoom(Room room)
@@ -77,5 +80,19 @@ public class World
 	public void LoadFromString(string loadString)
 	{
 		// TODO: Populate rooms, hallways, items, etc. with string
+	}
+
+	public void CreateBetaMap()
+	{
+		// Create a map of rooms with boxes
+		for (int i = 0; i < 3; i ++) {
+			for (int j = 0; j < 8; j++) {
+				// CreateRoom(new Vector2Int(4*-j, 4*-i), Vector2Int.one * 4, new Vector2Int[] {new Vector2Int(-2, 2),new Vector2Int(-10, 0),new Vector2Int(2, 5), new Vector2Int(-4, -2)});
+			}
+		}
+		CreateDoor((new Vector2Int (0,0)), 1);
+		CreateKey((new Vector2Int (2,0)), 1);
+		CreateLever((new Vector2Int (2,0)), 1);
+
 	}
 }
