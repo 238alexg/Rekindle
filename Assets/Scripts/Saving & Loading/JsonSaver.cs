@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class JsonSaver 
 {
-    public List<Vector2> characterData;
-    public List<Room> mapData;
-    string dataPath;
+    // public List<Vector2> characterData;
+    // public List<Room> mapData;
+    // string dataPath;
 
     void Start ()
     {
-        dataPath = Path.Combine(Application.persistentDataPath, "save.txt");
+        string dataPath = Path.Combine(UnityEngine.Application.persistentDataPath, "save.txt");
     }
 
     static void Save (string path, List<Vector2> characterData = null, List<Room> mapData = null)
@@ -27,16 +27,16 @@ public class JsonSaver
         }
     }
 
-    static CharacterData Load (string path)
+    static string Load (string path)
     {
         using (StreamReader streamReader = File.OpenText (path))
         {
             string jsonString = streamReader.ReadToEnd ();
             int dataSeparator = jsonString.IndexOf("+", 0);
-            // TODO: split string into different data type
-            // turn string back into List
-            // return the list
-            // return JsonUtility.FromJson<CharacterData> (jsonString);
+            string mapData = jsonString.Substring (0, dataSeparator);
+            string characterData = jsonString.Substring (dataSeparator, jsonString.Length - dataSeparator);
+
+            return mapData;
         }
     }
 }
