@@ -150,7 +150,7 @@ Transform:
   m_GameObject: {fileID: 229597985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 32, y: 32, z: 1}
   m_Children:
   - {fileID: 899995152}
   - {fileID: 747968731}
@@ -449,7 +449,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 540
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -534,32 +534,32 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 747968734}
     m_ColliderPaths:
-    - - X: 90000000
-        Y: 50000000
-      - X: -90000000
-        Y: 50000000
-      - X: -90000000
-        Y: -50000000
-      - X: 90000000
-        Y: -50000000
-    - - X: -80000000
-        Y: -40000000
-      - X: -80000000
-        Y: 40000000
-      - X: 80000000
-        Y: 40000000
-      - X: 80000000
-        Y: -40000000
+    - - X: 2880000000
+        Y: 1600000000
+      - X: -2880000000
+        Y: 1600000000
+      - X: -2880000000
+        Y: -1600000000
+      - X: 2880000000
+        Y: -1600000000
+    - - X: -2560000000
+        Y: -1280000000
+      - X: -2560000000
+        Y: 1280000000
+      - X: 2560000000
+        Y: 1280000000
+      - X: 2560000000
+        Y: -1280000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 9, y: 5}
-      - {x: -9, y: 5}
-      - {x: -9, y: -5}
-      - {x: 9, y: -5}
-    - - {x: -8, y: -4}
-      - {x: -8, y: 4}
-      - {x: 8, y: 4}
-      - {x: 8, y: -4}
+    - - {x: 288, y: 160}
+      - {x: -288, y: 160}
+      - {x: -288, y: -160}
+      - {x: 288, y: -160}
+    - - {x: -256, y: -128}
+      - {x: -256, y: 128}
+      - {x: 256, y: 128}
+      - {x: 256, y: -128}
   m_VertexDistance: 0.0005
 --- !u!50 &747968733
 Rigidbody2D:
