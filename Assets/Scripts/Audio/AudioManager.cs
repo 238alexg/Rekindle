@@ -45,7 +45,8 @@ public class AudioManager : MonoBehaviour
     {
         float pitch = frequency + Random.Range(-pitchJitter, pitchJitter);
         float amp = amplitude + Random.Range(-ampJitter, ampJitter);
-        SFXPlayer.PlayOneShot(clip);
+        SFXPlayer.pitch = pitch;
+        SFXPlayer.PlayOneShot(clip, amp);
     }
 
 }
