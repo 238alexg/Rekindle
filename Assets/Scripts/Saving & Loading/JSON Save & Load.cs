@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class JsonSaver : MonoBehaviour
+public class JsonSaver 
 {
-    public array characterData;
-    public array mapData;
+    public List<Vector2> characterData;
+    public List<Room> mapData;
     string dataPath;
 
     void Start ()
@@ -14,17 +14,11 @@ public class JsonSaver : MonoBehaviour
         dataPath = Path.Combine(Application.persistentDataPath, "save.txt");
     }
 
-    void Update ()
+    static void Save (string path, List<Vector2> characterData = null, List<Room> mapData = null)
     {
-        if(Input.GetKeyDown (KeyCode.S))
-            Save (characterData, mapData, dataPath);
-
-        if (Input.GetKeyDown (KeyCode.L))
-            save Data = Load (characterData, mapData, dataPath);
-    }
-
-    static void Save (array characterData = [], array mapData = [], string path)
-    {
+        string characterDataStringified = characterData.ToString();
+        string mapDataStringified = mapData.ToString();
+        string data = mapDataStringified + "+" + mapDataStringified; 
         string jsonString = JsonUtility.ToJson (data);
 
         using (StreamWriter streamWriter = File.CreateText (path))
@@ -38,7 +32,11 @@ public class JsonSaver : MonoBehaviour
         using (StreamReader streamReader = File.OpenText (path))
         {
             string jsonString = streamReader.ReadToEnd ();
-            return JsonUtility.FromJson<CharacterData> (jsonString);
+            int dataSeparator = jsonString.IndexOf("+", 0);
+            // TODO: split string into different data type
+            // turn string back into List
+            // return the list
+            // return JsonUtility.FromJson<CharacterData> (jsonString);
         }
     }
 }
