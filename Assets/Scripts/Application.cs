@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Application : MonoBehaviour
 {
 	public static Application Inst;
+	public ScreenSpaceDarkness ScreenSpaceDarkness;
+	public bool EnableScreenSpaceDarkness = false;
 
 #if USE_XB1_CONTROLLERS
 	readonly ControllerManager ControllerManager = new XboxControllerManager();
@@ -29,6 +29,7 @@ public class Application : MonoBehaviour
 
 	void InitializeGame()
 	{
+		Debug.Assert(ScreenSpaceDarkness != null, "No screen space darkness script attached to Application");
 		ControllerManager.BothControllersInitializedEvent += OnBothControllersInitialized;
 	}
 
@@ -40,5 +41,22 @@ public class Application : MonoBehaviour
 	void Update()
 	{
 		ControllerManager.Update();
+		UpdateScreenSpaceShader();
+	}
+
+	void UpdateScreenSpaceShader()
+	{
+		if (EnableScreenSpaceDarkness)
+		{
+			if (!ScreenSpaceDarkness.gameObject.activeSelf)
+			{
+				ScreenSpaceDarkness.gameObject.SetActive(true);
+			}
+			ScreenSpaceDarkness.UpdateTextureWithLights();
+		}
+		else if (ScreenSpaceDarkness.gameObject.activeSelf)
+		{
+			ScreenSpaceDarkness.gameObject.SetActive(false);
+		}
 	}
 }

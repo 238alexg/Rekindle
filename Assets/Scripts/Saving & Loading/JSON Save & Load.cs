@@ -7,7 +7,6 @@ public class JsonSaver : MonoBehaviour
 {
     public array characterData;
     public array mapData;
-    public array inventoryData;
     string dataPath;
 
     void Start ()
@@ -18,13 +17,13 @@ public class JsonSaver : MonoBehaviour
     void Update ()
     {
         if(Input.GetKeyDown (KeyCode.S))
-            Save (characterData, mapData, inventoryData, dataPath);
+            Save (characterData, mapData, dataPath);
 
         if (Input.GetKeyDown (KeyCode.L))
-            save Data = Load (characterData, mapData, inventoryData, dataPath);
+            save Data = Load (characterData, mapData, dataPath);
     }
 
-    static void Save (CharacterData data, string path)
+    static void Save (array characterData = [], array mapData = [], string path)
     {
         string jsonString = JsonUtility.ToJson (data);
 
