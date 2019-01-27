@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: cfaa97d1c91a16846b376ee1f342da99
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - BlueDoor: {instanceID: 0}
+  - GreenDoor: {instanceID: 0}
+  - RedDoor: {instanceID: 0}
+  - YellowDoor: {instanceID: 0}
+  - Open: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
