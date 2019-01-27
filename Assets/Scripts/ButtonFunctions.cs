@@ -20,12 +20,12 @@ public class ButtonFunctions : Button
     {
         Debug.LogError("test");
         base.OnPointerEnter(eventData);
-        AudioManager.PlayEffect(hover);
+        AudioManager.Inst.PlayEffect(hover);
     }
     public override void OnPointerClick(PointerEventData eventData)
     {
         Debug.LogError("test2");
         base.OnPointerClick(eventData);
-        AudioManager.PlayEffect(click);
+        AudioManager.Inst.PlayEffect(click);
     }
 }
