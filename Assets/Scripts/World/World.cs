@@ -142,13 +142,28 @@ public class World
 
 		Application.Inst.PlayerOne.transform.position = new Vector3((P1StartingPos.x + 0.5f) * RoomSize.x * World.TileSize, P1StartingPos.y * RoomSize.y * TileSize, -20);
 		Application.Inst.PlayerTwo.transform.position = new Vector3((P2StartingPos.x - 0.5f) * RoomSize.x * World.TileSize, P2StartingPos.y * RoomSize.y * TileSize, -20);
+		
+		Item redKey = CreateItemTile(Rooms[2, 2].Entrances[0].TilePosition + Vector3Int.right * 5, Item.ItemType.KeyRed);
+		AddDoor(Rooms[0, 1].Entrances[0].TilePosition, redKey);
+		AddWall(Rooms[1, 1].Entrances[0].TilePosition, WallOrientations.WallDirection.North);
+		AddWall(Rooms[1, 2].Entrances[0].TilePosition, WallOrientations.WallDirection.North);
+		AddWall(Rooms[1, 2].Entrances[1].TilePosition, WallOrientations.WallDirection.North);
+		AddWall(Rooms[1, 3].Entrances[1].TilePosition, WallOrientations.WallDirection.North);
+		AddWall(Rooms[2, 2].Entrances[1].TilePosition, WallOrientations.WallDirection.North);
+		AddWall(Rooms[3, 2].Entrances[0].TilePosition, WallOrientations.WallDirection.North);
+		AddWall(Rooms[3, 3].Entrances[0].TilePosition, WallOrientations.WallDirection.North);
 
-		Item key1 = new Item(Item.ItemType.KeyRed, 0);
+		// Lower hallway for blue
+		AddWall(Rooms[2, 0].Entrances[0].TilePosition, WallOrientations.WallDirection.North);
+		AddWall(Rooms[3, 1].Entrances[0].TilePosition, WallOrientations.WallDirection.North);
+		AddWall(Rooms[5, 1].Entrances[0].TilePosition, WallOrientations.WallDirection.North);
+		AddWall(Rooms[5, 1].Entrances[1].TilePosition, WallOrientations.WallDirection.North);
+		
 
-		Application.Inst.PlayerOne.Inventory.Add(key1);
-
-		AddDoor(Rooms[0, 1].Entrances[0].TilePosition, key1);
-		AddWall(Rooms[1, 0].Entrances[0].TilePosition, WallOrientations.WallDirection.North);
+		// North east hallway to key
+		AddWall(Rooms[3, 3].Entrances[1].TilePosition, WallOrientations.WallDirection.North);
+		AddWall(Rooms[4, 3].Entrances[1].TilePosition, WallOrientations.WallDirection.North);
+		AddWall(Rooms[5, 3].Entrances[1].TilePosition, WallOrientations.WallDirection.North);
 	}
 
 	void AddDoor(Vector3Int position, Item key)
@@ -180,9 +195,14 @@ public class World
 		}
 	}
 
-	public void CreateKey(Vector3Int position, int id)
+	public Item CreateItemTile(Vector3Int position, Item.ItemType type)
 	{
-
+		ItemTile itemTile = TileFinder.Activated.GetItem(type);
+		Item item = new Item(type, 0);
+		Items.SetTile(position, itemTile);
+		var newItemTile = Items.GetTile<ItemTile>(position);
+		//newItemTile.Item = item; // TODO: UNCOMMENT!!!
+		return item;
 	}
 
 

@@ -32,7 +32,7 @@ public class ScreenSpaceDarkness : MonoBehaviour
 	
 	public void UpdateTextureWithLights()
 	{
-		AddLight(TestLight, TestRadius, TestColor);
+		//AddLight(TestLight, TestRadius, TestColor);
 
 		ScreenSpaceMaterial.SetColorArray("_LightColors", LightColors);
 		ScreenSpaceMaterial.SetFloatArray("_LightRadii", LightRadii);

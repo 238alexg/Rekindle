@@ -8,9 +8,9 @@ using UnityEditor;
 
 public class ItemTile : Tile
 {
-	public event Action<Obstacle> ObstacleLockChangedEvent = delegate { };
+	public event Action<ItemTile> ItemPickedUpEvent = delegate { };
 
-	public Item Solution;
+	public Item Item;
 	public Vector3Int Position;
 
 	private void OnCollisionEnter2D(Collision2D collision)
@@ -20,12 +20,10 @@ public class ItemTile : Tile
 		if (player != null)
 		{
 			Debug.Log("Colliding with player: " + player);
+			player.Inventory.Add(Item);
+			Item = null;
+			ItemPickedUpEvent(this);
 		}
-	}
-	
-	void OnPlayerWalkOver()
-	{
-
 	}
 
 #if UNITY_EDITOR
