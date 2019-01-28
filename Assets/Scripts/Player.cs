@@ -69,9 +69,22 @@ public class Player : MonoBehaviour
 		{
 			var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
 			var normalizedScreenSpace = new Vector2(screenPoint.x / Screen.width, screenPoint.y / Screen.height);
-			Application.Inst.ScreenSpaceDarkness.AddLight(normalizedScreenSpace, radius: 0.2f, new Color(0.8f, 0.2f, 0.2f, 0.3f));
+            FlickerIndex += 3*Time.deltaTime % 2 * Mathf.PI;
+            SquareFlickerIndex = FlickerIndex * FlickerIndex;
+
+            float distToOtherPlayer = Mathf.Abs(Vector3Int.Distance(Application.Inst.PlayerOne.GetPlayerTilePosition(),
+                                        Application.Inst.PlayerTwo.GetPlayerTilePosition()));
+
+            Application.Inst.ScreenSpaceDarkness.AddLight(normalizedScreenSpace, 
+                    radius: Mathf.Clamp(1 /(distToOtherPlayer + 1f) + 0.01f * Mathf.Sin(FlickerIndex) + 0.005f * Mathf.Sin(3.1f * FlickerIndex), 0f, 0.5f), 
+                    new Color(0.8f + 0.1f * Mathf.Sin(SquareFlickerIndex), 
+                        0.2f + 0.1f * Mathf.Cos(SquareFlickerIndex),
+                        0.035f * distToOtherPlayer, 0.2f));
 		}
+
 	}
+
+    float FlickerIndex, SquareFlickerIndex;
 
 	Direction GetDirection(Vector2 joystickVector)
 	{
@@ -129,6 +142,9 @@ public class Player : MonoBehaviour
 
 			
 			var cellPos = tileMap.WorldToCell(destination);
+
+			var tile = tileMap.GetTile(cellPos);
+
 			var obstacle = tileMap.GetTile<Obstacle>(cellPos);
 
 			if (obstacle == null) return;

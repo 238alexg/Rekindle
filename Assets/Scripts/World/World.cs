@@ -143,8 +143,10 @@ public class World
 		Application.Inst.PlayerOne.transform.position = new Vector3((P1StartingPos.x + 0.5f) * RoomSize.x * World.TileSize, P1StartingPos.y * RoomSize.y * TileSize, -20);
 		Application.Inst.PlayerTwo.transform.position = new Vector3((P2StartingPos.x - 0.5f) * RoomSize.x * World.TileSize, P2StartingPos.y * RoomSize.y * TileSize, -20);
 		
-		Item redKey = CreateItemTile(Rooms[2, 2].Entrances[0].TilePosition + Vector3Int.right * 5, Item.ItemType.KeyRed);
-		AddDoor(Rooms[0, 1].Entrances[0].TilePosition, redKey);
+		//Item redKey = CreateItemTile(Rooms[2, 2].Entrances[0].TilePosition + Vector3Int.right * 5, Item.ItemType.KeyRed);
+		Application.Inst.PlayerOne.Inventory.Add(redKey);
+
+		//AddDoor(Rooms[0, 1].Entrances[0].TilePosition, redKey);
 		AddWall(Rooms[1, 1].Entrances[0].TilePosition, WallOrientations.WallDirection.North);
 		AddWall(Rooms[1, 2].Entrances[0].TilePosition, WallOrientations.WallDirection.North);
 		AddWall(Rooms[1, 2].Entrances[1].TilePosition, WallOrientations.WallDirection.North);
@@ -168,12 +170,29 @@ public class World
 
 	void AddDoor(Vector3Int position, Item key)
 	{
-		Obstacles.SetTile(Rooms[0, 1].Entrances[0].TilePosition, TileFinder.Door);
+		Obstacles.SetTile(Rooms[0, 1].Entrances[0].TilePosition, GetDoorFromKeyType(key.Type));
 		var door = Obstacles.GetTile<Obstacle>(position);
 		door.Position = position;
 		door.Solution = key;
 		door.ObstacleLockChangedEvent += OnObstacleLockChanged;
 		ObstacleList.Add(door);
+	}
+
+	Obstacle GetDoorFromKeyType(Item.ItemType itemType)
+	{
+		switch (itemType)
+		{
+			case Item.ItemType.KeyRed:
+				return TileFinder.Open.RedDoor;
+			case Item.ItemType.KeyBlue:
+				return TileFinder.Open.BlueDoor;
+			case Item.ItemType.KeyGreen:
+				return TileFinder.Open.GreenDoor;
+			case Item.ItemType.KeyYellow:
+				return TileFinder.Open.YellowDoor;
+			default:
+				return TileFinder.Door;
+		}
 	}
 
 	void AddWall(Vector3Int position, WallOrientations.WallDirection direction)
@@ -201,7 +220,7 @@ public class World
 		Item item = new Item(type, 0);
 		Items.SetTile(position, itemTile);
 		var newItemTile = Items.GetTile<ItemTile>(position);
-		//newItemTile.Item = item; // TODO: UNCOMMENT!!!
+		newItemTile.Item = item;
 		return item;
 	}
 

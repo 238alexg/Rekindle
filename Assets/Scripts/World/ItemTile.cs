@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 using UnityEditor;
 #endif
 
-public class ItemTile : Tile
+public class ItemTile : Tile, IAButtonHandler
 {
 	public event Action<ItemTile> ItemPickedUpEvent = delegate { };
 
@@ -19,11 +19,17 @@ public class ItemTile : Tile
 		//Detecting the Grid Position of Player
 		if (player != null)
 		{
-			Debug.Log("Colliding with player: " + player);
 			player.Inventory.Add(Item);
 			Item = null;
 			ItemPickedUpEvent(this);
 		}
+	}
+
+	public void OnAButtonPress(Player player)
+	{
+		player.Inventory.Add(Item);
+		Item = null;
+		ItemPickedUpEvent(this);
 	}
 
 #if UNITY_EDITOR
