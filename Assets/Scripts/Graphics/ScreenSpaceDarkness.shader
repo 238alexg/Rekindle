@@ -6,9 +6,10 @@
 	}
 	SubShader
 	{
-		Tags { "RenderType"="Trasnsparent" }
+		Tags { "Queue"="Transparent" "RenderType"="Trasnsparent" }
 		LOD 100
 
+		ZWrite Off
 		Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass
@@ -36,6 +37,7 @@
 			float _LightRadii[10];
 			float4 _LightColors[10];
 			float2 _TextureSize;
+			float2 _UVTiling;
 
 			v2f vert (appdata v)
 			{
@@ -48,6 +50,7 @@
 			fixed4 frag (v2f vertexData) : SV_Target
 			{
 				float4 color = tex2D(_DarknessTexture, vertexData.uv);
+				color *= 0.1;
 				color.a = 1;
 
 				float4 lightColor = float4(0,0,0,0);
@@ -75,7 +78,7 @@
 					}
 					else
 					{
-						float modifier = radiusSquared / totalDistanceSquared;
+						float modifier = radiusSquared / (totalDistanceSquared);
 						float4 blendedDarkness = color * (1 - modifier) + _LightColors[i] * pow(modifier, 2);
 						lightColor = (lightColor * lightOverlaps) + blendedDarkness;
 						lightOverlaps += 1;
