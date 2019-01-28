@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e80800bd0242e348b09a8bd87327d76, type: 3}
   m_Name: ItemActivation
   m_EditorClassIdentifier: 
-  ButtonBlue: {fileID: 11400000, guid: 93d691ea17312fb47bec8d3d187e0e55, type: 2}
-  ButtonGreen: {fileID: 11400000, guid: 493a51fb7354f2f4d9b34f55aad1b474, type: 2}
-  ButtonRed: {fileID: 11400000, guid: a7ed390c4b632204fbdda594db14c4e0, type: 2}
-  ButtonStone: {fileID: 11400000, guid: e84cd3f4252472a4dbb0c47ffb388eea, type: 2}
-  ButtonBluePressed: {fileID: 11400000, guid: 03d87e5eedf21c846a691fcbf05fa616, type: 2}
-  ButtonGreenPressed: {fileID: 11400000, guid: e725eea06ddf77f4aa7eb5aaa5778314, type: 2}
-  ButtonRedPressed: {fileID: 11400000, guid: fbfd54d14340b0544b0bd6b96ed52832, type: 2}
-  ButtonStonePressed: {fileID: 11400000, guid: 15641250d81d126479b134ce884cf708, type: 2}
-  Lever: {fileID: 11400000, guid: 98821800cd35f494f87a3984adf54b4e, type: 2}
-  LeverActivated: {fileID: 11400000, guid: 1386c1b81cd752f45b93b233af85a92a, type: 2}
+  ButtonBlue: {fileID: 11400000, guid: 67c0a7e8bfb7441469d74eb97048309b, type: 2}
+  ButtonGreen: {fileID: 11400000, guid: b877e495dbf296c4da1f9a896001d461, type: 2}
+  ButtonRed: {fileID: 11400000, guid: ae58fb48aab38c8408f594894b8dc89b, type: 2}
+  ButtonStone: {fileID: 11400000, guid: 1501556db01fd4748a4c65b6eb86dbca, type: 2}
+  ButtonBluePressed: {fileID: 11400000, guid: 67c0a7e8bfb7441469d74eb97048309b, type: 2}
+  ButtonGreenPressed: {fileID: 11400000, guid: 706479105f4dd594c8785128d18bac38, type: 2}
+  ButtonRedPressed: {fileID: 11400000, guid: f019dfcfc25d13042bb72d0e1f7bb3a3, type: 2}
+  ButtonStonePressed: {fileID: 11400000, guid: 585c93e536fad8d4789c46d0770c234c, type: 2}
+  Lever: {fileID: 11400000, guid: cddf661f9559040419cb9d44475954e4, type: 2}
+  LeverActivated: {fileID: 11400000, guid: 19c9b16fe133623459f51fcfffc2aca2, type: 2}
   Torch: {fileID: 0}
-  KeyBlue: {fileID: 11400000, guid: 877b6ee362839184c951cd47d410c786, type: 2}
-  KeyGreen: {fileID: 11400000, guid: 1fb4bd1a18b62b84da250cc7239ccb25, type: 2}
-  KeyRed: {fileID: 11400000, guid: 8dc96dbf61a61c04e848904a6208cd50, type: 2}
-  KeyYellow: {fileID: 11400000, guid: 847f23b2eef951948a6a5587622bedd4, type: 2}
+  KeyBlue: {fileID: 11400000, guid: f1138fdd3bbf5c548b6de715059ad438, type: 2}
+  KeyGreen: {fileID: 11400000, guid: cf6e8a2d77b9790468238465e1ba79b5, type: 2}
+  KeyRed: {fileID: 11400000, guid: 982a098ba5fb7d94eb61bf9bccea778e, type: 2}
+  KeyYellow: {fileID: 11400000, guid: f6b881fb929315e4487a8268cf566042, type: 2}
