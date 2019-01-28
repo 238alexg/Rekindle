@@ -33,7 +33,7 @@ public class ItemTile : Tile
 		string path = EditorUtility.SaveFilePanelInProject("Save Item Tile", "Obstacle", "Asset", "Save Item Tile", "Assets/Art/Tilemaps/Items");
 		if (path == "")
 			return;
-		AssetDatabase.CreateAsset(CreateInstance<Obstacle>(), path);
+		AssetDatabase.CreateAsset(CreateInstance<ItemTile>(), path);
 	}
 #endif
 }
