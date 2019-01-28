@@ -6,25 +6,22 @@ using UnityEngine;
 public class SceneLoader : MonoBehaviour
 {
     public AudioSource AudioPlayer;
-    private static Canvas StartCanvas;
-    private static Canvas DeveloperCanvas;
-    private bool clicked;
+    private static Canvas Canvas;
 
     private void Start()
     {
-        StartCanvas = GetComponent<Canvas>();
-        StartCanvas.enabled = true;
-        DeveloperCanvas = GetComponent<Canvas>();
-        DeveloperCanvas.enabled = true;
+        Canvas = GetComponent<Canvas>();
+        Canvas.enabled = true;
     }
 
     public void DisableCanvas()
     {
-         StartCanvas.enabled = false;
+        Canvas.enabled = false;
+
     }
 
     public void EnableCanvas()
     {
-        DeveloperCanvas.enabled = true;
+        Canvas.enabled = true;
     }
 }
