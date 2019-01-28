@@ -33,12 +33,12 @@ public class ScreenSpaceDarkness : MonoBehaviour
 	
 	public void UpdateTextureWithLights()
 	{
-		//AddLight(TestLight, TestRadius, TestColor);
-
 		ScreenSpaceMaterial.SetColorArray("_LightColors", LightColors);
 		ScreenSpaceMaterial.SetFloatArray("_LightRadii", LightRadii);
 		ScreenSpaceMaterial.SetVectorArray("_LightPositions", LightPositions);
-		ScreenSpaceMaterial.SetVector("_UVTiling", new Vector4()); // Palmer todo: Can you do a gentle oscillating wave here? For mist
+
+		Vector2 wave = Vector2.one * Time.deltaTime;
+		ScreenSpaceMaterial.SetVector("_UVTiling", new Vector4(wave.x, wave.y));
 
 		ActiveLightsThisFrame = 0;
 	}

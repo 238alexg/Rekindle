@@ -129,6 +129,9 @@ public class Player : MonoBehaviour
 
 			
 			var cellPos = tileMap.WorldToCell(destination);
+
+			var tile = tileMap.GetTile(cellPos);
+
 			var obstacle = tileMap.GetTile<Obstacle>(cellPos);
 
 			if (obstacle == null) return;

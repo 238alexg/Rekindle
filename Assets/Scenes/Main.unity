@@ -1392,7 +1392,7 @@ CompositeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1623,7 +1623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScreenSpaceDarkness: {fileID: 1090106696}
-  EnableScreenSpaceDarkness: 0
+  EnableScreenSpaceDarkness: 1
   PlayerOne: {fileID: 449106343}
   PlayerTwo: {fileID: 489220992}
   TileFinder: {fileID: 11400000, guid: 0c790e997ea04664586f05c35e8126c1, type: 2}
