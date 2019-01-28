@@ -16,4 +16,4 @@ MonoBehaviour:
   GreenDoor: {fileID: 11400000, guid: 6eb8c4b9f8d934cf58bfc47b1e888f06, type: 2}
   RedDoor: {fileID: 11400000, guid: f301565bba8d843f5bf323cec6dca2a6, type: 2}
   YellowDoor: {fileID: 11400000, guid: 9a371d4a103b048dab6459f7b9a7a7c2, type: 2}
-  Open: {fileID: 0}
+  Open: {fileID: 11400000, guid: cc2e1362fb92f4bfea36c0e775091bff, type: 2}
