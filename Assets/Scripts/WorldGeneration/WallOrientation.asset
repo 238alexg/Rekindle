@@ -24,3 +24,15 @@ MonoBehaviour:
     type: 2}
   SoutheastFacingWall: {fileID: 11400000, guid: fc9e581c1d32cab428ee791f1a26e4ae,
     type: 2}
+  InnerNorthWestFacingWall: {fileID: 11400000, guid: 57622543fe0ae7442a4a93a8285c916f,
+    type: 2}
+  InnerNorthEastFacingWall: {fileID: 11400000, guid: f94af04dd13cc73429978511c3318473,
+    type: 2}
+  InnerSouthEastFacingWall: {fileID: 11400000, guid: f7e65718a718e854b8411ede5af076d3,
+    type: 2}
+  InnerSouthWestFacingWall: {fileID: 11400000, guid: 3079e516d9a298e41aaf9c7e9ee5dd4a,
+    type: 2}
+  UpperLeftCorner: {fileID: 11400000, guid: fe2076b9feb97ab4e84909b6a2cc2212, type: 2}
+  UpperRightCorner: {fileID: 11400000, guid: 8f653a9968b36b54891e362f3d51079e, type: 2}
+  LowerRightCorner: {fileID: 11400000, guid: 03cef5580c0ddf44dbdaf114c438ff38, type: 2}
+  LowerLeftCorner: {fileID: 11400000, guid: e55244cbc33cd864898d894f888c1a09, type: 2}
