@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 public class ScreenSpaceDarkness : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class ScreenSpaceDarkness : MonoBehaviour
 		ScreenSpaceMaterial.SetColorArray("_LightColors", LightColors);
 		ScreenSpaceMaterial.SetFloatArray("_LightRadii", LightRadii);
 		ScreenSpaceMaterial.SetVectorArray("_LightPositions", LightPositions);
+		ScreenSpaceMaterial.SetVector("_UVTiling", new Vector4()); // Palmer todo: Can you do a gentle oscillating wave here? For mist
 
 		ActiveLightsThisFrame = 0;
 	}

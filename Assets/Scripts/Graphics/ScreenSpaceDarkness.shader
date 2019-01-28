@@ -49,7 +49,7 @@
 			
 			fixed4 frag (v2f vertexData) : SV_Target
 			{
-				float4 color = tex2D(_DarknessTexture, vertexData.uv);
+				float4 color = tex2D(_DarknessTexture, vertexData.uv + _UVTiling);
 				color *= 0.1;
 				color.a = 1;
 
